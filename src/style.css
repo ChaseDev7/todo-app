@@ -1,5 +1,7 @@
 :root {
   --border-color: rgb(209, 206, 206);
+  --orange-color: rgb(242, 175, 108);
+  --box-shadow-color: rgb(205, 200, 200);
 }
 
 @font-face {
@@ -36,7 +38,7 @@ body {
   align-items: center;
   justify-content: space-between;
   border: 1px solid var(--border-color);
-  box-shadow: 1px 1px 3px 1px rgb(205, 200, 200);
+  box-shadow: 1px 1px 3px 1px var(--box-shadow-color);
 }
 
 #todo-list-container {
@@ -57,8 +59,8 @@ body {
   font-size: 20px;
   padding: 7px 0;
   font-weight: bold;
-  background-color: rgb(242, 175, 108);
-  border-bottom: 1px solid rgb(205, 200, 200);
+  background-color: var(--orange-color);
+  border-bottom: 1px solid var(--box-shadow-color);
 }
 
 #todo-list {
@@ -83,7 +85,7 @@ body {
 }
 
 .todo-list-item:hover {
-  background-color: rgb(242, 175, 108);
+  background-color: var(--orange-color);
   color: white;
 }
 
@@ -112,18 +114,18 @@ body {
   border-radius: 5px;
   color: rgb(161, 157, 157);
   margin: 15px;
-  padding: 5px;
+  padding: 5px 10px;
   border: 1px solid var(--border-color);
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  box-shadow: 1px 1px 3px 1px rgb(205, 200, 200);
+  box-shadow: 1px 1px 3px 1px var(--box-shadow-color);
   transition: 0.7s;
 }
 
 #add-new-todo:hover {
-  background-color: rgb(242, 175, 108);
+  background-color: var(--orange-color);
   color: white;
 }
 
@@ -134,7 +136,7 @@ body {
   height: auto;
   border-radius: 10px;
   border: 1px solid var(--border-color);
-  box-shadow: 1px 1px 3px 1px rgb(205, 200, 200);
+  box-shadow: 1px 1px 3px 1px var(--box-shadow-color);
 }
 
 #main-container-title {
@@ -155,7 +157,7 @@ body {
   align-items: center;
   border-radius: 10px;
   border: 1px solid var(--border-color);
-  box-shadow: 1px 1px 3px 1px rgb(205, 200, 200);
+  box-shadow: 1px 1px 3px 1px var(--box-shadow-color);
 }
 
 #form {
@@ -166,7 +168,7 @@ body {
   font-weight: bold;
 }
 
-input {
+input, textarea {
   margin-left: 10px;
   border: 1px solid var(--border-color);
   border-radius: 10px;
@@ -176,10 +178,48 @@ input {
 }
 
 fieldset {
+  width: 100%;
   font-size: 15px;
   font-weight: 400;
   border: none;
   display: flex;
+  justify-content: center;
   align-items: center;
   margin-top: 10px;
+}
+
+#priority-fieldset {
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  width: 80%;
+  display: flex;
+  align-items: center;
+}
+
+.priority-option {
+  margin-top: 0;
+}
+
+textarea {
+  resize: none;
+  width: 200px;
+  height: 80px;
+}
+
+#submit-todo-button {
+  margin-top: 50px;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+  background-color: var(--orange-color);
+  border: 1px solid gray;
+  box-shadow: 1px 1px 3px 1px var(--box-shadow-color);
+  transition: 0.7s;
+}
+
+#submit-todo-button:hover {
+  background-color: white;
+  color: var(--orange-color);
 }
