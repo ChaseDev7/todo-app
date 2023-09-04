@@ -1,10 +1,18 @@
 const newForm = () => {
   const newTodoContainer = document.querySelector("#new-todo-container");
-  newTodoContainer.innerHTML = "";
+  const emptyToDoList = document.querySelector("#empty-todo");
+  newTodoContainer.removeChild(emptyToDoList);
   const todoForm = document.createElement("form");
   todoForm.setAttribute("id", "form");
   todoForm.textContent = "NEW TODO";
   newTodoContainer.appendChild(todoForm);
+
+  const closeButton = document.createElement("div");
+  closeButton.setAttribute("id", "new-form-close-btn");
+  closeButton.textContent = "X";
+  newTodoContainer.appendChild(closeButton);
+
+  closeButton.addEventListener("click", closeNewToDoForm);
 
   const titleFieldset = document.createElement("fieldset");
   titleFieldset.classList.add("todo-fieldset");
@@ -85,6 +93,12 @@ const newForm = () => {
   submitToDoFormButton.setAttribute("id", "submit-todo-button");
   submitToDoFormButton.setAttribute("value", "SUBMIT TODO");
   todoForm.appendChild(submitToDoFormButton);
-}
+
+  function closeNewToDoForm() {
+    newTodoContainer.removeChild(todoForm);
+    newTodoContainer.appendChild(emptyToDoList);
+    newTodoContainer.removeChild(closeButton);
+  };
+};
 
 export { newForm };
