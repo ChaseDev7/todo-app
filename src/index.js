@@ -1,4 +1,5 @@
 import './style.css';
+import { newForm } from './new-todo-form';
 
 const container = document.createElement("div");
 container.setAttribute("id", "container");
@@ -14,7 +15,7 @@ leftContainer.appendChild(todoListContainer);
 
 const todoListTitle = document.createElement("div");
 todoListTitle.setAttribute("id", "todo-list-title");
-todoListTitle.textContent = "TO-DO LISTS";
+todoListTitle.textContent = "TODO LISTS";
 todoListContainer.appendChild(todoListTitle);
 
 const todoList = document.createElement("div");
@@ -34,6 +35,20 @@ const todoListAllAmount = document.createElement("div");
 todoListAllAmount.classList.add("todo-list-item-amount");
 todoListAllAmount.textContent = "0";
 todoListAll.appendChild(todoListAllAmount);
+
+const todoListPersonal = document.createElement("div");
+todoListPersonal.classList.add("todo-list-item");
+todoList.appendChild(todoListPersonal);
+
+const todoListPersonalText = document.createElement("div");
+todoListPersonalText.classList.add("todo-list-item-text");
+todoListPersonalText.textContent = "Personal";
+todoListPersonal.appendChild(todoListPersonalText);
+
+const todoListPersonalAmount = document.createElement("div");
+todoListPersonalAmount.classList.add("todo-list-item-amount");
+todoListPersonalAmount.textContent = "2";
+todoListPersonal.appendChild(todoListPersonalAmount);
 
 const todoListWork = document.createElement("div");
 todoListWork.classList.add("todo-list-item");
@@ -55,10 +70,10 @@ leftContainer.appendChild(bottomTodoContainer);
 
 const addNewTodo = document.createElement("div");
 addNewTodo.setAttribute("id", "add-new-todo");
-addNewTodo.textContent = "+";
+addNewTodo.textContent = "+ New Todo";
 bottomTodoContainer.appendChild(addNewTodo);
 
-// addNewTodo.addEventListener("click", openNewTodoForm);
+addNewTodo.addEventListener("click", newForm);
 
 const mainContainer = document.createElement("div");
 mainContainer.setAttribute("id", "main-container");
@@ -75,5 +90,5 @@ container.appendChild(newTodoContainer);
 
 const emptyToDoList = document.createElement("div");
 emptyToDoList.setAttribute("id", "empty-todo");
-emptyToDoList.textContent = "The list has no to-do items.";
+emptyToDoList.textContent = "The list has no todo items.";
 newTodoContainer.appendChild(emptyToDoList);
