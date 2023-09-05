@@ -1,3 +1,9 @@
+const todoList = [];
+
+function Todo(title, description, dueDate) {
+  return { title, description, dueDate };
+};
+
 const newForm = () => {
   const newTodoContainer = document.querySelector("#new-todo-container");
   const emptyToDoList = document.querySelector("#empty-todo");
@@ -23,9 +29,9 @@ const newForm = () => {
   titleLabel.textContent = "Title:";
   titleFieldset.appendChild(titleLabel);
 
-  const titleInput = document.createElement("input");
-  titleInput.setAttribute("id", "title-input");
-  titleFieldset.appendChild(titleInput);
+  const title = document.createElement("input");
+  title.setAttribute("id", "title-input");
+  titleFieldset.appendChild(title);
 
   const descriptionFieldset = document.createElement("fieldset");
   descriptionFieldset.classList.add("todo-fieldset");
@@ -36,9 +42,9 @@ const newForm = () => {
   descriptionLabel.textContent = "Description:";
   descriptionFieldset.appendChild(descriptionLabel);
 
-  const descriptionTextarea = document.createElement("textarea");
-  descriptionTextarea.setAttribute("id", "description-textarea");
-  descriptionFieldset.appendChild(descriptionTextarea);
+  const description = document.createElement("textarea");
+  description.setAttribute("id", "description-textarea");
+  descriptionFieldset.appendChild(description);
 
   const dueDateFieldset = document.createElement("fieldset");
   dueDateFieldset.classList.add("todo-fieldset");
@@ -73,7 +79,7 @@ const newForm = () => {
 
   const lowPriorityLabel = document.createElement("label");
   lowPriorityLabel.setAttribute("for", "low-priority");
-  lowPriorityLabel.textContent = "Not Important";
+  lowPriorityLabel.textContent = "Low";
   priorityFieldset.appendChild(lowPriorityLabel);
 
   const highPriorityOption = document.createElement("input");
@@ -85,7 +91,7 @@ const newForm = () => {
 
   const highPriorityLabel = document.createElement("label");
   highPriorityLabel.setAttribute("for", "high-priority");
-  highPriorityLabel.textContent = "Important";
+  highPriorityLabel.textContent = "High";
   priorityFieldset.appendChild(highPriorityLabel);
 
   const submitToDoFormButton = document.createElement("input");
@@ -94,6 +100,8 @@ const newForm = () => {
   submitToDoFormButton.setAttribute("value", "SUBMIT TODO");
   todoForm.appendChild(submitToDoFormButton);
 
+  submitToDoFormButton.addEventListener("click", addTodoIntoList);
+
   function closeNewToDoForm() {
     newTodoContainer.removeChild(todoForm);
     newTodoContainer.appendChild(emptyToDoList);
@@ -101,4 +109,22 @@ const newForm = () => {
   };
 };
 
-export { newForm };
+const addTodoIntoList = () => {
+  const title = document.querySelector("#title-input").value;
+  const description = document.querySelector("#description-textarea").value;
+  const dueDate = document.querySelector("#due-date").value;
+
+  const newTodo = Todo(title, description, dueDate);
+  todoList.push(newTodo);
+  console.log(todoList);
+
+  const mainContainer = document.querySelector("#main-container");
+  const newToDoDiv = document.createElement("div");
+  newToDoDiv.textContent = newTodo.title;
+  const newToDoDivDescription = document.createElement("div");
+  newToDoDivDescription.textContent = newTodo.description;
+  mainContainer.appendChild(newToDoDiv);
+  mainContainer.appendChild(newToDoDivDescription);
+};
+
+export { newForm, todoList };

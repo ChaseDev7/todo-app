@@ -90,5 +90,5 @@ container.appendChild(newTodoContainer);
 
 const emptyToDoList = document.createElement("div");
 emptyToDoList.setAttribute("id", "empty-todo");
-emptyToDoList.textContent = "The list has no todo items.";
+emptyToDoList.textContent = "No todo item selected.";
 newTodoContainer.appendChild(emptyToDoList);
