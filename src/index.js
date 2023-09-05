@@ -33,6 +33,7 @@ todoListAll.appendChild(todoListAllText);
 
 const todoListAllAmount = document.createElement("div");
 todoListAllAmount.classList.add("todo-list-item-amount");
+todoListAllAmount.setAttribute("id", "todo-list-all-amount");
 todoListAllAmount.textContent = "0";
 todoListAll.appendChild(todoListAllAmount);
 
@@ -83,6 +84,10 @@ const mainContainerTitle = document.createElement("div");
 mainContainerTitle.setAttribute("id", "main-container-title");
 mainContainerTitle.textContent = "ALL";
 mainContainer.appendChild(mainContainerTitle);
+
+const todosContainer = document.createElement("div");
+todosContainer.setAttribute("id", "todos-container");
+mainContainer.appendChild(todosContainer);
 
 const newTodoContainer = document.createElement("div");
 newTodoContainer.setAttribute("id", "new-todo-container");

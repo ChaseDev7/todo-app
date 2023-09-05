@@ -1,13 +1,27 @@
-const todoList = [];
+import { showTodoList } from "./todo-items";
+import { todoListArrayLength } from "./todo-items";
+
+const todoListArray = [];
 
 function Todo(title, description, dueDate) {
   return { title, description, dueDate };
 };
 
+const closeNewToDoForm = () => {
+  const newTodoContainer = document.querySelector("#new-todo-container");
+  const todoForm = document.querySelector("#form");
+  const emptyToDoList = document.createElement("div");
+  emptyToDoList.setAttribute("id", "empty-todo");
+  emptyToDoList.textContent = "No todo item selected.";
+  const closeButton = document.querySelector("#new-form-close-btn");
+  newTodoContainer.removeChild(todoForm);
+  newTodoContainer.appendChild(emptyToDoList);
+  newTodoContainer.removeChild(closeButton);
+};
+
 const newForm = () => {
   const newTodoContainer = document.querySelector("#new-todo-container");
-  const emptyToDoList = document.querySelector("#empty-todo");
-  newTodoContainer.removeChild(emptyToDoList);
+  newTodoContainer.innerHTML = "";
   const todoForm = document.createElement("form");
   todoForm.setAttribute("id", "form");
   todoForm.textContent = "NEW TODO";
@@ -17,8 +31,6 @@ const newForm = () => {
   closeButton.setAttribute("id", "new-form-close-btn");
   closeButton.textContent = "X";
   newTodoContainer.appendChild(closeButton);
-
-  closeButton.addEventListener("click", closeNewToDoForm);
 
   const titleFieldset = document.createElement("fieldset");
   titleFieldset.classList.add("todo-fieldset");
@@ -102,11 +114,7 @@ const newForm = () => {
 
   submitToDoFormButton.addEventListener("click", addTodoIntoList);
 
-  function closeNewToDoForm() {
-    newTodoContainer.removeChild(todoForm);
-    newTodoContainer.appendChild(emptyToDoList);
-    newTodoContainer.removeChild(closeButton);
-  };
+  closeButton.addEventListener("click", closeNewToDoForm);
 };
 
 const addTodoIntoList = () => {
@@ -115,16 +123,11 @@ const addTodoIntoList = () => {
   const dueDate = document.querySelector("#due-date").value;
 
   const newTodo = Todo(title, description, dueDate);
-  todoList.push(newTodo);
-  console.log(todoList);
-
-  const mainContainer = document.querySelector("#main-container");
-  const newToDoDiv = document.createElement("div");
-  newToDoDiv.textContent = newTodo.title;
-  const newToDoDivDescription = document.createElement("div");
-  newToDoDivDescription.textContent = newTodo.description;
-  mainContainer.appendChild(newToDoDiv);
-  mainContainer.appendChild(newToDoDivDescription);
+  todoListArray.push(newTodo);
+  console.log(todoListArray);
+  closeNewToDoForm();
+  showTodoList();
+  todoListArrayLength();
 };
 
-export { newForm, todoList };
+export { newForm, todoListArray };
