@@ -1,7 +1,7 @@
-import { showTodoList } from "./todo-items";
-import { todoListArrayLength } from "./todo-items";
+import { showDefaultProjectList } from "./projects";
+import { defaultProjectArrayLength } from "./projects";
 
-const todoListArray = [];
+const defaultProjectArray = [];
 
 function Todo(title, description, dueDate) {
   return { title, description, dueDate };
@@ -14,9 +14,11 @@ const closeNewToDoForm = () => {
   emptyToDoList.setAttribute("id", "empty-todo");
   emptyToDoList.textContent = "No todo item selected.";
   const closeButton = document.querySelector("#new-form-close-btn");
+  const submitToDoFormButton = document.querySelector("#submit-todo-button");
   newTodoContainer.removeChild(todoForm);
   newTodoContainer.appendChild(emptyToDoList);
   newTodoContainer.removeChild(closeButton);
+  newTodoContainer.removeChild(submitToDoFormButton);
 };
 
 const newForm = () => {
@@ -110,8 +112,9 @@ const newForm = () => {
   const submitToDoFormButton = document.createElement("input");
   submitToDoFormButton.setAttribute("type", "button");
   submitToDoFormButton.setAttribute("id", "submit-todo-button");
+  submitToDoFormButton.setAttribute("form", "form");
   submitToDoFormButton.setAttribute("value", "SUBMIT TODO");
-  todoForm.appendChild(submitToDoFormButton);
+  newTodoContainer.appendChild(submitToDoFormButton);
 
   submitToDoFormButton.addEventListener("click", addTodoIntoList);
 
@@ -124,12 +127,13 @@ const addTodoIntoList = () => {
   const dueDate = document.querySelector("#due-date").value;
 
   const newTodo = Todo(title, description, dueDate);
-  todoListArray.push(newTodo);
-  console.log(todoListArray);
+  defaultProjectArray.push(newTodo);
+  console.log(defaultProjectArray);
 
   closeNewToDoForm();
-  showTodoList();
-  todoListArrayLength();
+  showDefaultProjectList();
+  defaultProjectArrayLength();
 };
 
-export { newForm, todoListArray };
+
+export { newForm, defaultProjectArray };
