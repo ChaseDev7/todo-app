@@ -38,6 +38,7 @@ const newForm = () => {
 
   const titleLabel = document.createElement("label");
   titleLabel.setAttribute("for", "title-input");
+  titleLabel.setAttribute("required", "");
   titleLabel.textContent = "Title:";
   titleFieldset.appendChild(titleLabel);
 
@@ -125,6 +126,7 @@ const addTodoIntoList = () => {
   const newTodo = Todo(title, description, dueDate);
   todoListArray.push(newTodo);
   console.log(todoListArray);
+
   closeNewToDoForm();
   showTodoList();
   todoListArrayLength();
