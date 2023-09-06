@@ -13,23 +13,23 @@
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin: 0;
   font-family: 'Roboto';
-  background: linear-gradient(142deg, rgba(97, 207, 97, 1) 0%, rgba(79,179,238,1) 100%);
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(90deg, rgba(97, 207, 97, 1) 0%, rgba(79,179,238,1) 100%);
 }
 
 #container {
   width: 100%;
-  height: 100vh;
+  height: auto;
   display: flex;
 }
 
  #left-container {
   width: 250px;
-  height: auto;
+  min-width: 200px;
+  height: 90vh;
   background-color: white;
   margin: 15px 0 15px 15px;
   border-radius: 10px;
@@ -130,10 +130,14 @@ body {
 }
 
 #main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
   padding: 15px;
   margin: 15px 0 15px 15px;
-  width: 400px;
-  min-width: 300px;
+  width: 50%;
+  min-width: 200px;
   height: auto;
   border-radius: 10px;
   background-color: white;
@@ -143,9 +147,10 @@ body {
 
 #main-container-title {
   font-size: 19px;
+  width: 100%;
   font-weight: bold;
-  padding-bottom: 10px;
-  border-bottom: 1px double var(--box-shadow-color);
+  padding-bottom: 5px;
+  border-bottom: 2px solid var(--box-shadow-color);
 }
 
 #todos-container {
@@ -160,8 +165,8 @@ body {
 #new-todo-container {
   padding: 15px;
   margin: 15px 15px 15px 15px;
-  width: 400px;
-  min-width: 270px;
+  width: 300px;
+  min-width: 200px;
   height: auto;
   background-color: white;
   color: rgb(161, 157, 157);
@@ -240,8 +245,16 @@ textarea {
   height: 130px;
 }
 
+select {
+  margin-left: 10px;
+  border-radius: 10px;
+  padding: 3px 10px;
+  border: 1px solid var(--border-color);
+}
+
 #submit-todo-button {
   margin-top: 50px;
+  margin-left: 0;
   border-radius: 5px;
   padding: 10px 20px;
   font-size: 20px;
@@ -284,18 +297,36 @@ textarea {
   color: var(--border-color);
 }
 
-@media (max-width: 940px) {
-  #left-container {
-    min-width: 170px;
-  }
+#new-todo-item-container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+}
 
-  #new-todo-container {
-    display: none;
+#new-todo-item-title {
+  width: 100%;
+  color: black;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  font-size: 19px;
+  font-weight: bold;
+  border-bottom: 1px solid var(--border-color);
+}
+
+#new-todo-item-due-date {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  font-size: 12px;
+}
+
+@media (max-width: 770px) {
+  #container {
+    flex-wrap: wrap;
   }
 
   #main-container {
     margin-right: 15px;
-    width: 450px;
-    min-width: 300px;
   }
 }

@@ -14,16 +14,15 @@ const closeNewToDoForm = () => {
   emptyToDoList.setAttribute("id", "empty-todo");
   emptyToDoList.textContent = "No todo item selected.";
   const closeButton = document.querySelector("#new-form-close-btn");
-  const submitToDoFormButton = document.querySelector("#submit-todo-button");
   newTodoContainer.removeChild(todoForm);
   newTodoContainer.appendChild(emptyToDoList);
   newTodoContainer.removeChild(closeButton);
-  newTodoContainer.removeChild(submitToDoFormButton);
 };
 
 const newForm = () => {
   const newTodoContainer = document.querySelector("#new-todo-container");
   newTodoContainer.innerHTML = "";
+
   const todoForm = document.createElement("form");
   todoForm.setAttribute("id", "form");
   todoForm.textContent = "NEW TODO";
@@ -46,6 +45,9 @@ const newForm = () => {
 
   const title = document.createElement("input");
   title.setAttribute("id", "title-input");
+  title.setAttribute("type", "text");
+  title.setAttribute("valueMissing", "false");
+  title.setAttribute("required", "");
   titleFieldset.appendChild(title);
 
   const descriptionFieldset = document.createElement("fieldset");
@@ -59,6 +61,7 @@ const newForm = () => {
 
   const description = document.createElement("textarea");
   description.setAttribute("id", "description-textarea");
+  description.setAttribute("required", "");
   descriptionFieldset.appendChild(description);
 
   const dueDateFieldset = document.createElement("fieldset");
@@ -73,6 +76,7 @@ const newForm = () => {
   const dueDate = document.createElement("input");
   dueDate.setAttribute("id", "due-date");
   dueDate.setAttribute("type", "date");
+  dueDate.setAttribute("required", "");
   dueDateFieldset.appendChild(dueDate);
 
   const priorityFieldset = document.createElement("fieldset");
@@ -109,19 +113,45 @@ const newForm = () => {
   highPriorityLabel.textContent = "High";
   priorityFieldset.appendChild(highPriorityLabel);
 
+  const projectSelectFieldset = document.createElement("fieldset");
+  projectSelectFieldset.classList.add("todo-fieldset");
+  projectSelectFieldset.setAttribute("id", "project-select-fieldset");
+  todoForm.appendChild(projectSelectFieldset);
+
+  const projectSelectLabel = document.createElement("label");
+  projectSelectLabel.setAttribute("for", "project-selector");
+  projectSelectLabel.textContent = "Choose Project for todo:";
+  projectSelectFieldset.appendChild(projectSelectLabel);
+
+  const projectSelector = document.createElement("select");
+  projectSelector.setAttribute("id", "project-selector");
+  projectSelectFieldset.appendChild(projectSelector);
+
+  const defaultProjectSelector = document.createElement("option");
+  defaultProjectSelector.setAttribute("value", "default-project");
+  defaultProjectSelector.classList.add("selector-option");
+  defaultProjectSelector.textContent = "Default Project";
+  projectSelector.appendChild(defaultProjectSelector);
+
+  const libraryAppSelector = document.createElement("option");
+  libraryAppSelector.setAttribute("value", "library-app");
+  libraryAppSelector.classList.add("selector-option");
+  libraryAppSelector.textContent = "Library App";
+  projectSelector.appendChild(libraryAppSelector);
+
   const submitToDoFormButton = document.createElement("input");
-  submitToDoFormButton.setAttribute("type", "button");
+  submitToDoFormButton.setAttribute("type", "submit");
   submitToDoFormButton.setAttribute("id", "submit-todo-button");
-  submitToDoFormButton.setAttribute("form", "form");
   submitToDoFormButton.setAttribute("value", "SUBMIT TODO");
-  newTodoContainer.appendChild(submitToDoFormButton);
+  todoForm.appendChild(submitToDoFormButton);
 
   submitToDoFormButton.addEventListener("click", addTodoIntoList);
 
   closeButton.addEventListener("click", closeNewToDoForm);
 };
 
-const addTodoIntoList = () => {
+const addTodoIntoList = (event) => {
+  event.preventDefault();
   const title = document.querySelector("#title-input").value;
   const description = document.querySelector("#description-textarea").value;
   const dueDate = document.querySelector("#due-date").value;

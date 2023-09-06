@@ -1,6 +1,7 @@
 import './style.css';
 import { newForm } from './new-todo-form';
 import { showDefaultProjectList } from './projects';
+import { showLibraryProjectList } from './projects';
 
 // ---- DOCUMENT CONTAINER ----
 const container = document.createElement("div");
@@ -53,6 +54,8 @@ const libraryProject = document.createElement("div");
 libraryProject.classList.add("todo-list-item");
 todoList.appendChild(libraryProject);
 
+libraryProject.addEventListener("click", showLibraryProjectList);
+
 // ---- Library Project text ----
 const libraryProjectText = document.createElement("div");
 libraryProjectText.classList.add("todo-list-item-text");
@@ -96,21 +99,13 @@ const newTodoContainer = document.createElement("div");
 newTodoContainer.setAttribute("id", "new-todo-container");
 container.appendChild(newTodoContainer);
 
-const emptyToDoList = document.createElement("div");
-emptyToDoList.setAttribute("id", "empty-todo");
-emptyToDoList.textContent = "No todo item selected.";
-newTodoContainer.appendChild(emptyToDoList);
+const displayEmptyToDoList = () => {
+  const emptyToDoList = document.createElement("div");
+  emptyToDoList.setAttribute("id", "empty-todo");
+  emptyToDoList.textContent = "No todo item selected.";
+  newTodoContainer.appendChild(emptyToDoList);
+}
 
-// FIX THIS.
-// This event listener needs to add selected todo into the right container.
-const toDoItemsInList = document.querySelectorAll(".todo-item");
-toDoItemsInList.forEach((toDoItem) => {
-  toDoItem.addEventListener("click", function showToDoItem () {
-    emptyToDoList.textContent = "";
-    const toDoItemContainer = document.createElement("div");
-    newTodoContainer.appendChild(toDoItemContainer);
-    const toDoItemTitle = document.createElement("div");
-    toDoItemTitle.textContent = toDoItem.dataset.todoId.title;
-    toDoItemContainer.appendChild(toDoItemTitle);
-  });
-});
+displayEmptyToDoList();
+
+export { newTodoContainer, displayEmptyToDoList };
