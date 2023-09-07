@@ -3,8 +3,8 @@ import { defaultProjectArrayLength } from "./projects";
 
 const defaultProjectArray = [];
 
-function Todo(title, description, dueDate) {
-  return { title, description, dueDate };
+function Todo(title, description, dueDate, lowPriority, highPriority) {
+  return { title, description, dueDate, lowPriority, highPriority };
 };
 
 const closeNewToDoForm = () => {
@@ -33,51 +33,39 @@ const newForm = () => {
   closeButton.textContent = "X";
   newTodoContainer.appendChild(closeButton);
 
-  const titleFieldset = document.createElement("fieldset");
-  titleFieldset.classList.add("todo-fieldset");
-  todoForm.appendChild(titleFieldset);
-
   const titleLabel = document.createElement("label");
   titleLabel.setAttribute("for", "title-input");
   titleLabel.setAttribute("required", "");
   titleLabel.textContent = "Title:";
-  titleFieldset.appendChild(titleLabel);
+  todoForm.appendChild(titleLabel);
 
   const title = document.createElement("input");
   title.setAttribute("id", "title-input");
   title.setAttribute("type", "text");
   title.setAttribute("valueMissing", "false");
   title.setAttribute("required", "");
-  titleFieldset.appendChild(title);
-
-  const descriptionFieldset = document.createElement("fieldset");
-  descriptionFieldset.classList.add("todo-fieldset");
-  todoForm.appendChild(descriptionFieldset);
+  todoForm.appendChild(title);
 
   const descriptionLabel = document.createElement("label");
   descriptionLabel.setAttribute("for", "description-textarea");
   descriptionLabel.textContent = "Description:";
-  descriptionFieldset.appendChild(descriptionLabel);
+  todoForm.appendChild(descriptionLabel);
 
   const description = document.createElement("textarea");
   description.setAttribute("id", "description-textarea");
   description.setAttribute("required", "");
-  descriptionFieldset.appendChild(description);
-
-  const dueDateFieldset = document.createElement("fieldset");
-  dueDateFieldset.classList.add("todo-fieldset");
-  todoForm.appendChild(dueDateFieldset);
+  todoForm.appendChild(description);
 
   const dueDateLabel = document.createElement("label");
   dueDateLabel.setAttribute("for", "due-date");
   dueDateLabel.textContent = "Due Date:";
-  dueDateFieldset.appendChild(dueDateLabel);
+  todoForm.appendChild(dueDateLabel);
 
   const dueDate = document.createElement("input");
   dueDate.setAttribute("id", "due-date");
   dueDate.setAttribute("type", "date");
   dueDate.setAttribute("required", "");
-  dueDateFieldset.appendChild(dueDate);
+  todoForm.appendChild(dueDate);
 
   const priorityFieldset = document.createElement("fieldset");
   priorityFieldset.classList.add("todo-fieldset");
@@ -94,10 +82,13 @@ const newForm = () => {
   lowPriorityOption.classList.add("priority-option");
   lowPriorityOption.setAttribute("name", "priority-option");
   lowPriorityOption.setAttribute("id", "low-priority");
+  lowPriorityOption.setAttribute("value", "low-priority");
+  lowPriorityOption.setAttribute("checked", "");
   priorityFieldset.appendChild(lowPriorityOption);
 
   const lowPriorityLabel = document.createElement("label");
   lowPriorityLabel.setAttribute("for", "low-priority");
+  lowPriorityLabel.setAttribute("id", "low-priority-label");
   lowPriorityLabel.textContent = "Low";
   priorityFieldset.appendChild(lowPriorityLabel);
 
@@ -106,26 +97,24 @@ const newForm = () => {
   highPriorityOption.classList.add("priority-option");
   highPriorityOption.setAttribute("name", "priority-option");
   highPriorityOption.setAttribute("id", "high-priority");
+  highPriorityOption.setAttribute("value", "high-priority");
   priorityFieldset.appendChild(highPriorityOption);
 
   const highPriorityLabel = document.createElement("label");
   highPriorityLabel.setAttribute("for", "high-priority");
+  highPriorityLabel.setAttribute("id", "high-priority-label");
   highPriorityLabel.textContent = "High";
   priorityFieldset.appendChild(highPriorityLabel);
 
-  const projectSelectFieldset = document.createElement("fieldset");
-  projectSelectFieldset.classList.add("todo-fieldset");
-  projectSelectFieldset.setAttribute("id", "project-select-fieldset");
-  todoForm.appendChild(projectSelectFieldset);
-
   const projectSelectLabel = document.createElement("label");
   projectSelectLabel.setAttribute("for", "project-selector");
+  projectSelectLabel.setAttribute("id", "project-selector-label");
   projectSelectLabel.textContent = "Choose Project for todo:";
-  projectSelectFieldset.appendChild(projectSelectLabel);
+  todoForm.appendChild(projectSelectLabel);
 
   const projectSelector = document.createElement("select");
   projectSelector.setAttribute("id", "project-selector");
-  projectSelectFieldset.appendChild(projectSelector);
+  todoForm.appendChild(projectSelector);
 
   const defaultProjectSelector = document.createElement("option");
   defaultProjectSelector.setAttribute("value", "default-project");
@@ -155,11 +144,12 @@ const addTodoIntoList = (event) => {
   const title = document.querySelector("#title-input").value;
   const description = document.querySelector("#description-textarea").value;
   const dueDate = document.querySelector("#due-date").value;
+  const lowPriority = document.querySelector("#low-priority").checked;
+  const highPriority = document.querySelector("#high-priority").checked;
 
-  const newTodo = Todo(title, description, dueDate);
+  const newTodo = Todo(title, description, dueDate, lowPriority, highPriority);
   defaultProjectArray.push(newTodo);
   console.log(defaultProjectArray);
-
   closeNewToDoForm();
   showDefaultProjectList();
   defaultProjectArrayLength();

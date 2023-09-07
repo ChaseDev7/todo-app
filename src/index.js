@@ -90,6 +90,11 @@ mainContainerTitle.setAttribute("id", "main-container-title");
 mainContainerTitle.textContent = "DEFAULT PROJECT";
 mainContainer.appendChild(mainContainerTitle);
 
+const currentTodosTitle = document.createElement("div");
+currentTodosTitle.setAttribute("id", "current-todos-title");
+currentTodosTitle.textContent = "CURRENT";
+mainContainer.appendChild(currentTodosTitle);
+
 const todosContainer = document.createElement("div");
 todosContainer.setAttribute("id", "todos-container");
 mainContainer.appendChild(todosContainer);
