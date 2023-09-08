@@ -1,0 +1,83 @@
+#left-container {
+  flex: 1;
+  min-width: 170px;
+  height: 90vh;
+  max-height: auto;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgb(243, 235, 235);
+  border-right: 1px solid var(--box-shadow-color);
+}
+
+#todo-list {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.todo-list-item {
+  width: 85%;
+  margin: 1px;
+  font-size: 15px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.7s;
+}
+
+.todo-list-item:hover {
+  background-color: var(--border-color);
+}
+
+.todo-list-item-amount {
+  border-radius: 50%;
+  background-color: var(--blue-color);
+  color: white;
+  width: 23px;
+  height: 23px;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.7s;
+}
+
+.todo-list-item-amount:hover {
+  color: var(--blue-color);
+  background-color: white;
+}
+
+#bottom-todo-container {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+}
+
+#add-new-todo {
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 5px;
+  color: var(--blue-color);
+  background-color: white;
+  margin: 15px;
+  padding: 5px 10px;
+  border: 1px solid var(--blue-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.7s;
+}
+
+#add-new-todo:hover {
+  background-color: var(--blue-color);
+  color: white;
+}

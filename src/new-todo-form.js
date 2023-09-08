@@ -8,74 +8,84 @@ function Todo(title, description, dueDate, lowPriority, highPriority) {
 };
 
 const closeNewToDoForm = () => {
-  const newTodoContainer = document.querySelector("#new-todo-container");
-  const todoForm = document.querySelector("#form");
-  const emptyToDoList = document.createElement("div");
-  emptyToDoList.setAttribute("id", "empty-todo");
-  emptyToDoList.textContent = "No todo item selected.";
-  const closeButton = document.querySelector("#new-form-close-btn");
-  newTodoContainer.removeChild(todoForm);
-  newTodoContainer.appendChild(emptyToDoList);
-  newTodoContainer.removeChild(closeButton);
+  const bgForNewTodo = document.querySelector("#new-todo-bg");
+  bgForNewTodo.style.display = "none";
+  const containerForNewTodo = document.querySelector("#new-todo-container");
+  containerForNewTodo.style.display = "none";
+  containerForNewTodo.innerHTML = "";
 };
 
 const newForm = () => {
-  const newTodoContainer = document.querySelector("#new-todo-container");
-  newTodoContainer.innerHTML = "";
+  const bgForNewTodo = document.querySelector("#new-todo-bg");
+  bgForNewTodo.style.display = "flex";
+  const containerForNewTodo = document.querySelector("#new-todo-container");
+  containerForNewTodo.style.display = "flex";
 
+  const newToDoTitleContainer = document.createElement("div");
+  newToDoTitleContainer.setAttribute("id", "new-todo-title-container");
+  containerForNewTodo.appendChild(newToDoTitleContainer);
+
+  const newToDoTitle = document.createElement("div");
+  newToDoTitle.setAttribute("id", "new-todo-title");
+  newToDoTitle.textContent = "NEW TODO";
+  newToDoTitleContainer.appendChild(newToDoTitle);
+  
   const todoForm = document.createElement("form");
   todoForm.setAttribute("id", "form");
-  todoForm.textContent = "NEW TODO";
-  newTodoContainer.appendChild(todoForm);
+  containerForNewTodo.appendChild(todoForm);
 
   const closeButton = document.createElement("div");
   closeButton.setAttribute("id", "new-form-close-btn");
   closeButton.textContent = "X";
-  newTodoContainer.appendChild(closeButton);
+  newToDoTitleContainer.appendChild(closeButton);
 
-  const titleLabel = document.createElement("label");
-  titleLabel.setAttribute("for", "title-input");
-  titleLabel.setAttribute("required", "");
-  titleLabel.textContent = "Title:";
-  todoForm.appendChild(titleLabel);
+  const titleFieldset = document.createElement("fieldset");
+  titleFieldset.classList.add("todo-fieldset");
+  todoForm.appendChild(titleFieldset);
 
   const title = document.createElement("input");
   title.setAttribute("id", "title-input");
   title.setAttribute("type", "text");
+  title.setAttribute("maxlength", "50");
   title.setAttribute("valueMissing", "false");
+  title.setAttribute("placeholder", "Title: (max-length: 50 char)");
   title.setAttribute("required", "");
-  todoForm.appendChild(title);
+  titleFieldset.appendChild(title);
 
-  const descriptionLabel = document.createElement("label");
-  descriptionLabel.setAttribute("for", "description-textarea");
-  descriptionLabel.textContent = "Description:";
-  todoForm.appendChild(descriptionLabel);
+  const descriptionFieldset = document.createElement("fieldset");
+  descriptionFieldset.classList.add("todo-fieldset");
+  todoForm.appendChild(descriptionFieldset);
 
   const description = document.createElement("textarea");
   description.setAttribute("id", "description-textarea");
   description.setAttribute("required", "");
-  todoForm.appendChild(description);
+  description.setAttribute("placeholder", "Description:");
+  descriptionFieldset.appendChild(description);
+
+  const dueDateFieldset = document.createElement("fieldset");
+  dueDateFieldset.classList.add("todo-fieldset");
+  todoForm.appendChild(dueDateFieldset);
 
   const dueDateLabel = document.createElement("label");
   dueDateLabel.setAttribute("for", "due-date");
   dueDateLabel.textContent = "Due Date:";
-  todoForm.appendChild(dueDateLabel);
+  dueDateFieldset.appendChild(dueDateLabel);
 
   const dueDate = document.createElement("input");
   dueDate.setAttribute("id", "due-date");
   dueDate.setAttribute("type", "date");
   dueDate.setAttribute("required", "");
-  todoForm.appendChild(dueDate);
+  dueDateFieldset.appendChild(dueDate);
 
   const priorityFieldset = document.createElement("fieldset");
   priorityFieldset.classList.add("todo-fieldset");
   priorityFieldset.setAttribute("id", "priority-fieldset");
   todoForm.appendChild(priorityFieldset);
 
-  const priorityLegend = document.createElement("legend");
-  priorityLegend.setAttribute("for", "priority-fieldset");
-  priorityLegend.textContent = "Priority:";
-  priorityFieldset.appendChild(priorityLegend);
+  const priorityTitle = document.createElement("div");
+  priorityTitle.setAttribute("id", "priority-title");
+  priorityTitle.textContent = "Priority:";
+  priorityFieldset.appendChild(priorityTitle);
 
   const lowPriorityOption = document.createElement("input");
   lowPriorityOption.setAttribute("type", "radio");
@@ -105,28 +115,7 @@ const newForm = () => {
   highPriorityLabel.setAttribute("id", "high-priority-label");
   highPriorityLabel.textContent = "High";
   priorityFieldset.appendChild(highPriorityLabel);
-
-  const projectSelectLabel = document.createElement("label");
-  projectSelectLabel.setAttribute("for", "project-selector");
-  projectSelectLabel.setAttribute("id", "project-selector-label");
-  projectSelectLabel.textContent = "Choose Project for todo:";
-  todoForm.appendChild(projectSelectLabel);
-
-  const projectSelector = document.createElement("select");
-  projectSelector.setAttribute("id", "project-selector");
-  todoForm.appendChild(projectSelector);
-
-  const defaultProjectSelector = document.createElement("option");
-  defaultProjectSelector.setAttribute("value", "default-project");
-  defaultProjectSelector.classList.add("selector-option");
-  defaultProjectSelector.textContent = "Default Project";
-  projectSelector.appendChild(defaultProjectSelector);
-
-  const libraryAppSelector = document.createElement("option");
-  libraryAppSelector.setAttribute("value", "library-app");
-  libraryAppSelector.classList.add("selector-option");
-  libraryAppSelector.textContent = "Library App";
-  projectSelector.appendChild(libraryAppSelector);
+  
 
   const submitToDoFormButton = document.createElement("input");
   submitToDoFormButton.setAttribute("type", "submit");

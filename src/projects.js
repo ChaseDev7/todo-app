@@ -1,19 +1,16 @@
 import { defaultProjectArray } from "./new-todo-form";
-import { newTodoContainer } from ".";
-import { displayEmptyToDoList } from ".";
 
 const resetContainers = () => {
-  newTodoContainer.innerHTML = "";
-  displayEmptyToDoList();
-  const todosContainer = document.querySelector("#todos-container");
-  todosContainer.innerHTML = "";
+  const bgForNewTodo = document.querySelector("#new-todo-bg");
+  bgForNewTodo.style.display = "none";
+  const containerForNewTodo = document.querySelector("#new-todo-container");
+  containerForNewTodo.style.display = "none";
 };
 
 const showDefaultProjectList = () => {
-  const mainContainer = document.querySelector("#main-container");
-  const currentTodosTitle = document.querySelector("#current-todos-title");
-  currentTodosTitle.style.display = "flex";
   resetContainers();
+  const todosContainer = document.querySelector("#todos-container");
+  todosContainer.innerHTML = "";
   defaultProjectArray.sort((dd1, dd2) => (dd1.dueDate > dd2.dueDate) ? 1 : (dd1.dueDate < dd2.dueDate) ? -1 : 0);
 
   for (let i = 0; i < defaultProjectArray.length; i++) {
@@ -33,7 +30,7 @@ const showDefaultProjectList = () => {
     if (itemHighPriority == true) {
       const highPriorityContainer = document.createElement("div");
       highPriorityContainer.classList.add("high-priority-container");
-      highPriorityContainer.textContent = "HIGH PRIORITY";
+      highPriorityContainer.textContent = "HIGH";
       todoItem.appendChild(highPriorityContainer);
     };
     const itemDueDate = document.createElement("div");
@@ -46,31 +43,45 @@ const showDefaultProjectList = () => {
 
   todoItemsInList.forEach((todoItem) => {
     todoItem.addEventListener("click", function showToDoItem () {
+      const bgForNewTodo = document.querySelector("#new-todo-bg");
+      bgForNewTodo.style.display = "flex";
+      const containerForNewTodo = document.querySelector("#new-todo-container");
+      containerForNewTodo.style.display = "flex";
+      containerForNewTodo.innerHTML = "";
       const todoItemInArray = defaultProjectArray[todoItem.dataset.todoId];
-      newTodoContainer.innerHTML = "";
       const toDoItemContainer = document.createElement("div");
       toDoItemContainer.setAttribute("id", "new-todo-item-container");
-      newTodoContainer.appendChild(toDoItemContainer);
-      const closeTodoItemBtn = document.createElement("button");
-      closeTodoItemBtn.setAttribute("id", "close-todo-item-button");
-      closeTodoItemBtn.textContent = "X";
-      newTodoContainer.appendChild(closeTodoItemBtn);
+      containerForNewTodo.appendChild(toDoItemContainer);
+      const toDoItemTitleContainer = document.createElement("div");
+      toDoItemTitleContainer.setAttribute("id", "new-todo-item-title-container");
+      toDoItemContainer.appendChild(toDoItemTitleContainer);
       const toDoItemTitle = document.createElement("div");
       toDoItemTitle.setAttribute("id", "new-todo-item-title");
       toDoItemTitle.textContent = todoItemInArray.title;
-      toDoItemContainer.appendChild(toDoItemTitle);
+      toDoItemTitleContainer.appendChild(toDoItemTitle);
+      const closeTodoItemBtn = document.createElement("button");
+      closeTodoItemBtn.setAttribute("id", "close-todo-item-button");
+      closeTodoItemBtn.textContent = "X";
+      toDoItemTitleContainer.appendChild(closeTodoItemBtn);
       const toDoItemDueDate = document.createElement("div");
       toDoItemDueDate.setAttribute("id", "new-todo-item-due-date");
       toDoItemDueDate.textContent = `Due date: ${todoItemInArray.dueDate}`;
       toDoItemContainer.appendChild(toDoItemDueDate);
+      const toDoItemPriority = document.createElement("div");
+      toDoItemPriority.setAttribute("id", "new-todo-item-priority");
+      toDoItemPriority.textContent = "Priority: ";
+      toDoItemContainer.appendChild(toDoItemPriority);
       const toDoItemDescription = document.createElement("div");
       toDoItemDescription.setAttribute("id", "new-todo-item-description");
-      toDoItemDescription.textContent = todoItemInArray.description;
+      toDoItemDescription.textContent = `Description: ${todoItemInArray.description}`;
       toDoItemContainer.appendChild(toDoItemDescription);
 
       const resetNewToDoContainer = () => {
-        newTodoContainer.innerHTML = "";
-        displayEmptyToDoList();
+        const bgForNewTodo = document.querySelector("#new-todo-bg");
+        bgForNewTodo.style.display = "none";
+        const containerForNewTodo = document.querySelector("#new-todo-container");
+        containerForNewTodo.style.display = "none";
+        containerForNewTodo.innerHTML = "";
       };
 
       closeTodoItemBtn.addEventListener("click", resetNewToDoContainer);
@@ -84,10 +95,4 @@ const defaultProjectArrayLength = () => {
   listAmount.textContent = defaultProjectListLength;
 };
 
-const showLibraryProjectList = () => {
-  resetContainers();
-};
-
-
-
-export { showDefaultProjectList, defaultProjectArrayLength, showLibraryProjectList };
+export { showDefaultProjectList, defaultProjectArrayLength };

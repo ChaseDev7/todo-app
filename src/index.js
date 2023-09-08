@@ -1,7 +1,14 @@
 import './style.css';
+import './left.css';
+import './main.css';
+import './new.css';
 import { newForm } from './new-todo-form';
 import { showDefaultProjectList } from './projects';
-import { showLibraryProjectList } from './projects';
+
+const navBar = document.createElement("div");
+navBar.setAttribute("id", "nav-bar");
+navBar.textContent = "Todo App";
+document.body.appendChild(navBar);
 
 // ---- DOCUMENT CONTAINER ----
 const container = document.createElement("div");
@@ -17,12 +24,6 @@ container.appendChild(leftContainer);
 const projectListContainer = document.createElement("div");
 projectListContainer.setAttribute("id", "todo-list-container");
 leftContainer.appendChild(projectListContainer);
-
-// --- TITLE for PROJECTS container ----
-const projectListTitle = document.createElement("div");
-projectListTitle.setAttribute("id", "todo-list-title");
-projectListTitle.textContent = "PROJECTS";
-projectListContainer.appendChild(projectListTitle);
 
 // ---- Container for each Project ----
 const todoList = document.createElement("div");
@@ -49,25 +50,7 @@ defaultProject.appendChild(defaultProjectAmount);
 
 defaultProject.addEventListener("click", showDefaultProjectList);
 
-// ---- Library Project item container ----
-const libraryProject = document.createElement("div");
-libraryProject.classList.add("todo-list-item");
-todoList.appendChild(libraryProject);
-
-libraryProject.addEventListener("click", showLibraryProjectList);
-
-// ---- Library Project text ----
-const libraryProjectText = document.createElement("div");
-libraryProjectText.classList.add("todo-list-item-text");
-libraryProjectText.textContent = "Library App";
-libraryProject.appendChild(libraryProjectText);
-
-// ---- Number of Library Project todos ----
-const libraryProjectAmount = document.createElement("div");
-libraryProjectAmount.classList.add("todo-list-item-amount");
-libraryProjectAmount.textContent = "0";
-libraryProject.appendChild(libraryProjectAmount);
-
+// ---- Bottom container with buttons to add todo/project ----
 const bottomTodoContainer = document.createElement("div");
 bottomTodoContainer.setAttribute("id", "bottom-todo-container");
 leftContainer.appendChild(bottomTodoContainer);
@@ -87,30 +70,18 @@ container.appendChild(mainContainer);
 
 const mainContainerTitle = document.createElement("div");
 mainContainerTitle.setAttribute("id", "main-container-title");
-mainContainerTitle.textContent = "DEFAULT PROJECT";
+mainContainerTitle.textContent = defaultProjectText.textContent.toUpperCase();
 mainContainer.appendChild(mainContainerTitle);
-
-const currentTodosTitle = document.createElement("div");
-currentTodosTitle.setAttribute("id", "current-todos-title");
-currentTodosTitle.textContent = "CURRENT";
-mainContainer.appendChild(currentTodosTitle);
 
 const todosContainer = document.createElement("div");
 todosContainer.setAttribute("id", "todos-container");
 mainContainer.appendChild(todosContainer);
 
 // ---- NEW TODOS CONTAINER ----
+const newTodoBG = document.createElement("div");
+newTodoBG.setAttribute("id", "new-todo-bg");
+document.body.appendChild(newTodoBG);
+
 const newTodoContainer = document.createElement("div");
 newTodoContainer.setAttribute("id", "new-todo-container");
-container.appendChild(newTodoContainer);
-
-const displayEmptyToDoList = () => {
-  const emptyToDoList = document.createElement("div");
-  emptyToDoList.setAttribute("id", "empty-todo");
-  emptyToDoList.textContent = "No todo item selected.";
-  newTodoContainer.appendChild(emptyToDoList);
-}
-
-displayEmptyToDoList();
-
-export { newTodoContainer, displayEmptyToDoList };
+document.body.appendChild(newTodoContainer);
