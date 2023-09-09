@@ -2,6 +2,7 @@ import { showDefaultProjectList } from "./projects";
 import { defaultProjectArrayLength } from "./projects";
 
 const defaultProjectArray = [];
+const mainContainer = document.querySelector("#main-container");
 
 function Todo(title, description, dueDate, lowPriority, highPriority) {
   return { title, description, dueDate, lowPriority, highPriority };
@@ -16,6 +17,7 @@ const closeNewToDoForm = () => {
 };
 
 const newForm = () => {
+
   const bgForNewTodo = document.querySelector("#new-todo-bg");
   bgForNewTodo.style.display = "flex";
   const containerForNewTodo = document.querySelector("#new-todo-container");
@@ -34,9 +36,9 @@ const newForm = () => {
   todoForm.setAttribute("id", "form");
   containerForNewTodo.appendChild(todoForm);
 
-  const closeButton = document.createElement("div");
-  closeButton.setAttribute("id", "new-form-close-btn");
-  closeButton.textContent = "X";
+  const closeButton = document.createElement("class");
+  closeButton.classList.add("id", "material-symbols-outlined");
+  closeButton.textContent = "close";
   newToDoTitleContainer.appendChild(closeButton);
 
   const titleFieldset = document.createElement("fieldset");

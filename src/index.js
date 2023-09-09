@@ -5,10 +5,30 @@ import './new.css';
 import { newForm } from './new-todo-form';
 import { showDefaultProjectList } from './projects';
 
+const link = document.createElement("link");
+link.setAttribute("rel", "stylesheet");
+link.setAttribute("href", "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0");
+document.head.appendChild(link);
+
 const navBar = document.createElement("div");
 navBar.setAttribute("id", "nav-bar");
-navBar.textContent = "Todo App";
 document.body.appendChild(navBar);
+
+const navBarTitle = document.createElement("div");
+navBarTitle.setAttribute("id", "nav-bar-title");
+navBarTitle.textContent = "Todo App";
+navBar.appendChild(navBarTitle);
+
+const menuIcon = document.createElement("class");
+menuIcon.setAttribute("id", "menu-icon");
+menuIcon.classList.add("id", "material-symbols-outlined");
+menuIcon.textContent = "menu";
+navBar.appendChild(menuIcon);
+
+const closeMenuBtn = document.createElement("class");
+closeMenuBtn.classList.add("id", "material-symbols-outlined");
+closeMenuBtn.setAttribute("id", "close-menu-button");
+closeMenuBtn.textContent = "close";
 
 // ---- DOCUMENT CONTAINER ----
 const container = document.createElement("div");
@@ -85,3 +105,21 @@ document.body.appendChild(newTodoBG);
 const newTodoContainer = document.createElement("div");
 newTodoContainer.setAttribute("id", "new-todo-container");
 document.body.appendChild(newTodoContainer);
+
+const openLeftContainer = () => {
+  navBar.appendChild(closeMenuBtn);
+  navBar.removeChild(menuIcon);
+  leftContainer.setAttribute("style", "display: flex");
+  mainContainer.setAttribute("style", "display: none");
+};
+
+const closeMenu = () => {
+  navBar.removeChild(closeMenuBtn);
+  navBar.appendChild(menuIcon);
+  mainContainer.removeAttribute("style", "display: none");
+  leftContainer.removeAttribute("style", "display: flex");
+};
+
+closeMenuBtn.addEventListener("click", closeMenu);
+
+menuIcon.addEventListener("click", openLeftContainer);

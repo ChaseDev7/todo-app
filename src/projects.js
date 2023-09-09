@@ -1,4 +1,5 @@
 import { defaultProjectArray } from "./new-todo-form";
+import { showTodoItem } from "./show-todo";
 
 const resetContainers = () => {
   const bgForNewTodo = document.querySelector("#new-todo-bg");
@@ -39,54 +40,7 @@ const showDefaultProjectList = () => {
     todoItemContainer.appendChild(itemDueDate);
   };
 
-  const todoItemsInList = document.querySelectorAll(".todo-item");
-
-  todoItemsInList.forEach((todoItem) => {
-    todoItem.addEventListener("click", function showToDoItem () {
-      const bgForNewTodo = document.querySelector("#new-todo-bg");
-      bgForNewTodo.style.display = "flex";
-      const containerForNewTodo = document.querySelector("#new-todo-container");
-      containerForNewTodo.style.display = "flex";
-      containerForNewTodo.innerHTML = "";
-      const todoItemInArray = defaultProjectArray[todoItem.dataset.todoId];
-      const toDoItemContainer = document.createElement("div");
-      toDoItemContainer.setAttribute("id", "new-todo-item-container");
-      containerForNewTodo.appendChild(toDoItemContainer);
-      const toDoItemTitleContainer = document.createElement("div");
-      toDoItemTitleContainer.setAttribute("id", "new-todo-item-title-container");
-      toDoItemContainer.appendChild(toDoItemTitleContainer);
-      const toDoItemTitle = document.createElement("div");
-      toDoItemTitle.setAttribute("id", "new-todo-item-title");
-      toDoItemTitle.textContent = todoItemInArray.title;
-      toDoItemTitleContainer.appendChild(toDoItemTitle);
-      const closeTodoItemBtn = document.createElement("button");
-      closeTodoItemBtn.setAttribute("id", "close-todo-item-button");
-      closeTodoItemBtn.textContent = "X";
-      toDoItemTitleContainer.appendChild(closeTodoItemBtn);
-      const toDoItemDueDate = document.createElement("div");
-      toDoItemDueDate.setAttribute("id", "new-todo-item-due-date");
-      toDoItemDueDate.textContent = `Due date: ${todoItemInArray.dueDate}`;
-      toDoItemContainer.appendChild(toDoItemDueDate);
-      const toDoItemPriority = document.createElement("div");
-      toDoItemPriority.setAttribute("id", "new-todo-item-priority");
-      toDoItemPriority.textContent = "Priority: ";
-      toDoItemContainer.appendChild(toDoItemPriority);
-      const toDoItemDescription = document.createElement("div");
-      toDoItemDescription.setAttribute("id", "new-todo-item-description");
-      toDoItemDescription.textContent = `Description: ${todoItemInArray.description}`;
-      toDoItemContainer.appendChild(toDoItemDescription);
-
-      const resetNewToDoContainer = () => {
-        const bgForNewTodo = document.querySelector("#new-todo-bg");
-        bgForNewTodo.style.display = "none";
-        const containerForNewTodo = document.querySelector("#new-todo-container");
-        containerForNewTodo.style.display = "none";
-        containerForNewTodo.innerHTML = "";
-      };
-
-      closeTodoItemBtn.addEventListener("click", resetNewToDoContainer);
-    });
-  });
+  showTodoItem();
 };
 
 const defaultProjectArrayLength = () => {

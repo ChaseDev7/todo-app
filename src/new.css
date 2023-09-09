@@ -4,8 +4,6 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
-  backdrop-filter: blur(50px);
-  opacity: 0.8;
   background-color: white;
   position: fixed;
   top: 0;
@@ -20,13 +18,11 @@
   justify-content: center;
   align-items: center;
   position: fixed;
-  top: 50px;
-  left: 25%;
-  right: 25%;
-  height: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50vh;
   background-color: white;
-  border-radius: 5px;
-  box-shadow: 1px 1px 3px 1px var(--box-shadow-color);
 }
 
 #new-todo-title-container {
@@ -36,8 +32,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 5px 5px 0 0;
-  border: 1px solid var(--box-shadow-color);
+  border-radius: 0;
 }
 
 #new-todo-title {
@@ -64,22 +59,14 @@ fieldset {
   align-items: center;
 }
 
-#new-form-close-btn {
+.material-symbols-outlined {
   cursor: pointer;
   height: 20px;
   width: 20px;
   color: white;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border: none;
   margin-right: 10px;
-  transition: 0.7s;
-}
-
-#new-form-close-btn:hover {
-  background-color: white;
-  color: var(--blue-color);
+  margin-bottom: 5px;
 }
 
 #title-input {
@@ -159,4 +146,36 @@ select {
 #submit-todo-button:hover {
   background-color: var(--blue-color);
   color: white;
+}
+
+@media (min-width: 500px) {
+  #new-todo-bg {
+    opacity: 0.8;
+  }
+
+  #new-todo-container {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50px;
+    left: 25%;
+    right: 25%;
+    height: auto;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px 1px var(--box-shadow-color);
+  }
+
+  #new-todo-title-container {
+    background-color: var(--blue-color);
+    height: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px 5px 0 0;
+    border: 1px solid var(--box-shadow-color);
+  }
 }

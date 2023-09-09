@@ -4,11 +4,12 @@
   height: 90vh;
   max-height: auto;
   background-color: white;
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: space-between;
   background-color: rgb(243, 235, 235);
   border-right: 1px solid var(--box-shadow-color);
+  transition: 0.7s;
 }
 
 #todo-list {
@@ -34,6 +35,11 @@
 
 .todo-list-item:hover {
   background-color: var(--border-color);
+}
+
+.todo-list-item-text {
+  font-size: 15px;
+  font-weight: bold;
 }
 
 .todo-list-item-amount {
@@ -80,4 +86,16 @@
 #add-new-todo:hover {
   background-color: var(--blue-color);
   color: white;
+}
+
+@media (min-width: 500px) {
+  #left-container {
+    display: flex;
+  }
+}
+
+@media (min-width: 900px) {
+  .todo-list-item-text {
+    font-size: 20px;
+  }
 }

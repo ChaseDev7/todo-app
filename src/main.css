@@ -6,7 +6,7 @@
   padding: 15px;
   flex: 3;
   min-width: 100px;
-  height: auto;
+  height: 80vh;
   background-color: white;
 }
 
@@ -48,6 +48,11 @@
   color: white;
 }
 
+.item-title-container {
+  display: flex;
+  align-items: center;
+}
+
 .high-priority-container {
   font-size: 10px;
   background-color: rgb(177, 28, 28);
@@ -55,4 +60,25 @@
   padding: 2px 5px;
   margin-left: 5px;
   border-radius: 10px;
+}
+
+.item-due-date {
+  font-size: 11px;
+  color: var(--border-color);
+}
+
+@media (min-width: 500px) {
+  #main-container {
+    height: auto;
+  }
+}
+
+@media (min-width: 800px) {
+  .todo-item {
+    font-size: 18px;
+  }
+
+  .item-due-date {
+    font-size: 14px;
+  }
 }
