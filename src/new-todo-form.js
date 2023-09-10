@@ -1,8 +1,6 @@
+import { projectArrayLength } from "./projects";
+import { defaultProject } from ".";
 import { showDefaultProjectList } from "./projects";
-import { defaultProjectArrayLength } from "./projects";
-
-const defaultProjectArray = [];
-const mainContainer = document.querySelector("#main-container");
 
 function Todo(title, description, dueDate, lowPriority, highPriority) {
   return { title, description, dueDate, lowPriority, highPriority };
@@ -17,7 +15,6 @@ const closeNewToDoForm = () => {
 };
 
 const newForm = () => {
-
   const bgForNewTodo = document.querySelector("#new-todo-bg");
   bgForNewTodo.style.display = "flex";
   const containerForNewTodo = document.querySelector("#new-todo-container");
@@ -49,9 +46,8 @@ const newForm = () => {
   title.setAttribute("id", "title-input");
   title.setAttribute("type", "text");
   title.setAttribute("maxlength", "50");
-  title.setAttribute("valueMissing", "false");
   title.setAttribute("placeholder", "Title: (max-length: 50 char)");
-  title.setAttribute("required", "");
+  title.required = true;
   titleFieldset.appendChild(title);
 
   const descriptionFieldset = document.createElement("fieldset");
@@ -60,7 +56,6 @@ const newForm = () => {
 
   const description = document.createElement("textarea");
   description.setAttribute("id", "description-textarea");
-  description.setAttribute("required", "");
   description.setAttribute("placeholder", "Description:");
   descriptionFieldset.appendChild(description);
 
@@ -76,7 +71,7 @@ const newForm = () => {
   const dueDate = document.createElement("input");
   dueDate.setAttribute("id", "due-date");
   dueDate.setAttribute("type", "date");
-  dueDate.setAttribute("required", "");
+  dueDate.required = true;
   dueDateFieldset.appendChild(dueDate);
 
   const priorityFieldset = document.createElement("fieldset");
@@ -117,12 +112,11 @@ const newForm = () => {
   highPriorityLabel.setAttribute("id", "high-priority-label");
   highPriorityLabel.textContent = "High";
   priorityFieldset.appendChild(highPriorityLabel);
-  
 
   const submitToDoFormButton = document.createElement("input");
   submitToDoFormButton.setAttribute("type", "submit");
   submitToDoFormButton.setAttribute("id", "submit-todo-button");
-  submitToDoFormButton.setAttribute("value", "SUBMIT TODO");
+  submitToDoFormButton.setAttribute("value", "Submit Todo");
   todoForm.appendChild(submitToDoFormButton);
 
   submitToDoFormButton.addEventListener("click", addTodoIntoList);
@@ -139,12 +133,12 @@ const addTodoIntoList = (event) => {
   const highPriority = document.querySelector("#high-priority").checked;
 
   const newTodo = Todo(title, description, dueDate, lowPriority, highPriority);
-  defaultProjectArray.push(newTodo);
-  console.log(defaultProjectArray);
+  defaultProject.projectTodos.push(newTodo);
+  console.log(defaultProject);
   closeNewToDoForm();
   showDefaultProjectList();
-  defaultProjectArrayLength();
+  projectArrayLength();
 };
 
 
-export { newForm, defaultProjectArray };
+export { newForm };

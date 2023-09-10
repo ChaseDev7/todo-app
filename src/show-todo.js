@@ -1,16 +1,16 @@
-import { defaultProjectArray } from "./new-todo-form";
+import { defaultProject } from ".";
 
 const showTodoItem = () => {
   const todoItemsInList = document.querySelectorAll(".todo-item");
 
   todoItemsInList.forEach((todoItem) => {
-    todoItem.addEventListener("click", function showToDoItem () {
+    todoItem.addEventListener("click", function showItemDetails () {
       const bgForNewTodo = document.querySelector("#new-todo-bg");
       bgForNewTodo.style.display = "flex";
       const containerForNewTodo = document.querySelector("#new-todo-container");
       containerForNewTodo.style.display = "flex";
       containerForNewTodo.innerHTML = "";
-      const todoItemInArray = defaultProjectArray[todoItem.dataset.todoId];
+      const todoItemInArray = defaultProject.projectTodos[todoItem.dataset.todoId];
       const toDoItemContainer = document.createElement("div");
       toDoItemContainer.setAttribute("id", "new-todo-item-container");
       containerForNewTodo.appendChild(toDoItemContainer);

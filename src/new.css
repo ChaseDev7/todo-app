@@ -21,7 +21,7 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 50vh;
+  height: auto;
   background-color: white;
 }
 
@@ -43,7 +43,7 @@
   color: white;
 }
 
-#form {
+#form, #project-form {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -82,7 +82,6 @@ fieldset {
 input, textarea {
   margin: 5px 10px 0 10px;
   font-family: 'Roboto';
-  color: var(--blue-color);
   border: none;
   font-size: 15px;
 }
@@ -95,11 +94,18 @@ input, textarea {
 }
 
 #priority-fieldset {
-  border-radius: 10px;
   width: 100px;
   padding: 11px 11px 11px 12px;
   display: flex;
-  margin-bottom: 30px;
+}
+
+#project-title-input {
+  width: 90%;
+  height: 30px;
+  margin: 5px 10px 50px 10px;
+  font-family: 'Roboto';
+  border: none;
+  font-size: 15px;
 }
 
 label {
@@ -118,18 +124,47 @@ label {
   margin: 0 2px;
 }
 
+#low-priority-label {
+  color: rgb(11, 147, 11);
+  border: 2px solid rgb(11, 147, 11);
+  transition: 0.7s;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 10px;
+}
+
+#low-priority-label:hover {
+  color: white;
+  background-color: rgb(11, 147, 11);
+  cursor: pointer;
+}
+
+#high-priority-label {
+  color: rgb(177, 28, 28);
+  border: 2px solid rgb(177, 28, 28);
+  transition: 0.7s;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 10px;
+}
+
+#high-priority-label:hover {
+  color: white;
+  background-color: rgb(177, 28, 28);
+  cursor: pointer;
+}
+
 textarea {
   resize: none;
 }
 
-select {
-  margin-left: 10px;
-  border-radius: 10px;
-  padding: 3px 10px;
-  border: 1px solid var(--border-color);
+.priority-option {
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
 }
 
-#submit-todo-button {
+#submit-todo-button, #submit-project-button {
   position: absolute;
   bottom: 10px;
   right: 10px;
@@ -143,7 +178,7 @@ select {
   transition: 0.7s;
 }
 
-#submit-todo-button:hover {
+#submit-todo-button:hover, #submit-project-button:hover {
   background-color: var(--blue-color);
   color: white;
 }

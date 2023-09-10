@@ -3,7 +3,10 @@ import './left.css';
 import './main.css';
 import './new.css';
 import { newForm } from './new-todo-form';
-import { showDefaultProjectList } from './projects';
+import { newProjectForm } from './new-project-form';
+import { projectsArray } from './new-project-form';
+
+const defaultProject = [];
 
 const link = document.createElement("link");
 link.setAttribute("rel", "stylesheet");
@@ -50,25 +53,22 @@ const todoList = document.createElement("div");
 todoList.setAttribute("id", "todo-list");
 projectListContainer.appendChild(todoList);
 
-// ---- Default Project item container ----
-const defaultProject = document.createElement("div");
-defaultProject.classList.add("todo-list-item");
-todoList.appendChild(defaultProject);
+const projectListItem = document.createElement("div");
+projectListItem.classList.add("project-list-item");
+todoList.appendChild(projectListItem);
 
-// ---- Default Project text ----
-const defaultProjectText = document.createElement("div");
-defaultProjectText.classList.add("todo-list-item-text");
-defaultProjectText.textContent = "Default Project";
-defaultProject.appendChild(defaultProjectText);
+// ---- Project text ----
+const projectText = document.createElement("div");
+projectText.classList.add("project-text");
+projectText.textContent = "0";
+projectListItem.appendChild(projectText);
 
-// ---- Number of Default Project todos ----
-const defaultProjectAmount = document.createElement("div");
-defaultProjectAmount.classList.add("todo-list-item-amount");
-defaultProjectAmount.setAttribute("id", "default-project-amount");
-defaultProjectAmount.textContent = "0";
-defaultProject.appendChild(defaultProjectAmount);
+// ---- Number of Project todos ----
+const projectAmount = document.createElement("div");
+projectAmount.classList.add("project-amount");
+projectAmount.textContent = "0";
+projectListItem.appendChild(projectAmount);
 
-defaultProject.addEventListener("click", showDefaultProjectList);
 
 // ---- Bottom container with buttons to add todo/project ----
 const bottomTodoContainer = document.createElement("div");
@@ -80,7 +80,14 @@ addNewTodo.setAttribute("id", "add-new-todo");
 addNewTodo.textContent = "+ New Todo";
 bottomTodoContainer.appendChild(addNewTodo);
 
+const addNewProject = document.createElement("div");
+addNewProject.setAttribute("id", "add-new-project");
+addNewProject.textContent = "+ New Project";
+bottomTodoContainer.appendChild(addNewProject);
+
 addNewTodo.addEventListener("click", newForm);
+
+addNewProject.addEventListener("click", newProjectForm);
 
 
 // ---- MAIN CONTAINER ----
@@ -90,7 +97,7 @@ container.appendChild(mainContainer);
 
 const mainContainerTitle = document.createElement("div");
 mainContainerTitle.setAttribute("id", "main-container-title");
-mainContainerTitle.textContent = defaultProjectText.textContent.toUpperCase();
+mainContainerTitle.textContent = projectsArray[0].title;
 mainContainer.appendChild(mainContainerTitle);
 
 const todosContainer = document.createElement("div");
@@ -123,3 +130,5 @@ const closeMenu = () => {
 closeMenuBtn.addEventListener("click", closeMenu);
 
 menuIcon.addEventListener("click", openLeftContainer);
+
+export { defaultProject };

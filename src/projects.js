@@ -1,4 +1,5 @@
-import { defaultProjectArray } from "./new-todo-form";
+import { projectsArray } from "./new-project-form";
+import { defaultProject } from ".";
 import { showTodoItem } from "./show-todo";
 
 const resetContainers = () => {
@@ -12,9 +13,9 @@ const showDefaultProjectList = () => {
   resetContainers();
   const todosContainer = document.querySelector("#todos-container");
   todosContainer.innerHTML = "";
-  defaultProjectArray.sort((dd1, dd2) => (dd1.dueDate > dd2.dueDate) ? 1 : (dd1.dueDate < dd2.dueDate) ? -1 : 0);
+  defaultProject.sort((dd1, dd2) => (dd1.dueDate > dd2.dueDate) ? 1 : (dd1.dueDate < dd2.dueDate) ? -1 : 0);
 
-  for (let i = 0; i < defaultProjectArray.length; i++) {
+  for (let i = 0; i < defaultProject.length; i++) {
     const todosContainer = document.querySelector("#todos-container");
     const todoItemContainer = document.createElement("div");
     todoItemContainer.classList.add("todo-item");
@@ -25,9 +26,9 @@ const showDefaultProjectList = () => {
     todoItemContainer.appendChild(todoItem);
     const todoItemTitle = document.createElement("div");
     todoItemTitle.classList.add("item-title");
-    todoItemTitle.textContent = defaultProjectArray[i].title;
+    todoItemTitle.textContent = defaultProject.title;
     todoItem.appendChild(todoItemTitle);
-    let itemHighPriority = defaultProjectArray[i].highPriority;
+    let itemHighPriority = defaultProject.highPriority;
     if (itemHighPriority == true) {
       const highPriorityContainer = document.createElement("div");
       highPriorityContainer.classList.add("high-priority-container");
@@ -36,17 +37,19 @@ const showDefaultProjectList = () => {
     };
     const itemDueDate = document.createElement("div");
     itemDueDate.classList.add("item-due-date");
-    itemDueDate.textContent = defaultProjectArray[i].dueDate;
+    itemDueDate.textContent = defaultProject.dueDate;
     todoItemContainer.appendChild(itemDueDate);
   };
 
-  showTodoItem();
+  // showTodoItem();
 };
 
 const defaultProjectArrayLength = () => {
-  const listAmount = document.querySelector("#default-project-amount");
-  const defaultProjectListLength = defaultProjectArray.length;
-  listAmount.textContent = defaultProjectListLength;
+  for (let i = 0; i < defaultProject.length; i++) {
+    const listAmount = document.querySelector(".project-amount");
+    const projectListLength = defaultProject.length;
+    listAmount.textContent = projectListLength;
+  };
 };
 
 export { showDefaultProjectList, defaultProjectArrayLength };
