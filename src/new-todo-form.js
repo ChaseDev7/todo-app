@@ -1,8 +1,11 @@
 import { defaultProject } from ".";
+import { projectList } from "./projects";
 import { updateDefaultProjectAmount } from ".";
 import { showDefaultProjectTodos } from "./projects";
 import { showProjectsList } from "./projects";
 import { showTodoItem } from "./show-todo";
+import { showNewProjectTodos } from "./projects";
+import './new.css';
 
 function Todo(title, description, dueDate, lowPriority, highPriority) {
   return { title, description, dueDate, lowPriority, highPriority };
@@ -36,7 +39,8 @@ const newForm = () => {
   containerForNewTodo.appendChild(todoForm);
 
   const closeButton = document.createElement("class");
-  closeButton.classList.add("id", "material-symbols-outlined");
+  closeButton.classList.add("material-symbols-outlined");
+  closeButton.setAttribute("id", "close-button");
   closeButton.textContent = "close";
   newToDoTitleContainer.appendChild(closeButton);
 
@@ -98,7 +102,7 @@ const newForm = () => {
   const lowPriorityLabel = document.createElement("label");
   lowPriorityLabel.setAttribute("for", "low-priority");
   lowPriorityLabel.setAttribute("id", "low-priority-label");
-  lowPriorityLabel.textContent = "Low";
+  lowPriorityLabel.textContent = "LOW";
   priorityFieldset.appendChild(lowPriorityLabel);
 
   const highPriorityOption = document.createElement("input");
@@ -112,8 +116,24 @@ const newForm = () => {
   const highPriorityLabel = document.createElement("label");
   highPriorityLabel.setAttribute("for", "high-priority");
   highPriorityLabel.setAttribute("id", "high-priority-label");
-  highPriorityLabel.textContent = "High";
+  highPriorityLabel.textContent = "HIGH";
   priorityFieldset.appendChild(highPriorityLabel);
+
+  const projectFieldset = document.createElement("fieldset");
+  projectFieldset.setAttribute("id", "project-fieldset");
+  todoForm.appendChild(projectFieldset);
+
+  const defaultProjectName = document.createElement("div");
+  defaultProjectName.classList.add("default-project-name");
+  defaultProjectName.textContent = defaultProject.textContent.toUpperCase();
+  projectFieldset.appendChild(defaultProjectName);
+
+  for (let i = 0; i < projectList.length; i++) {
+    const projectName = document.createElement("div");
+    projectName.classList.add("project-name");
+    projectName.textContent = projectList[i].textContent.toUpperCase();
+    projectFieldset.appendChild(projectName);
+  };
 
   const submitToDoFormButton = document.createElement("input");
   submitToDoFormButton.setAttribute("type", "submit");
@@ -141,6 +161,7 @@ const addTodoIntoList = (event) => {
   updateDefaultProjectAmount();
   showProjectsList();
   showTodoItem();
+  showNewProjectTodos();
 };
 
 

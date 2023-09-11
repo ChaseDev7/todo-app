@@ -4,6 +4,7 @@ import './main.css';
 import './new.css';
 import { newForm } from './new-todo-form';
 import { newProjectForm } from './new-project-form';
+import { showDefaultProjectTodos } from './projects';
 
 const defaultProject = [];
 defaultProject.textContent = "Default Project";
@@ -46,7 +47,7 @@ container.appendChild(leftContainer);
 
 // ---- Container for PROJECTS TITLE and LIST ----
 const projectListContainer = document.createElement("div");
-projectListContainer.setAttribute("id", "todo-list-container");
+projectListContainer.setAttribute("id", "project-list-container");
 leftContainer.appendChild(projectListContainer);
 
 // ---- Container for each Project ----
@@ -54,9 +55,9 @@ const defaultProjectContainer = document.createElement("div");
 defaultProjectContainer.setAttribute("id", "default-project-container");
 projectListContainer.appendChild(defaultProjectContainer);
 
-const todoList = document.createElement("div");
-todoList.setAttribute("id", "todo-list");
-projectListContainer.appendChild(todoList);
+const projectList = document.createElement("div");
+projectList.setAttribute("id", "project-list");
+projectListContainer.appendChild(projectList);
 
 // ---- Project text ----
 const projectText = document.createElement("div");
@@ -71,6 +72,8 @@ projectAmount.classList.add("project-amount");
 const updateDefaultProjectAmount = () => {
   projectAmount.textContent = defaultProject.length;
 };
+
+defaultProjectContainer.addEventListener("click", showDefaultProjectTodos);
 
 updateDefaultProjectAmount();
 defaultProjectContainer.appendChild(projectAmount);
@@ -93,7 +96,6 @@ addNewTodo.addEventListener("click", newForm);
 
 addNewProject.addEventListener("click", newProjectForm);
 
-
 // ---- MAIN CONTAINER ----
 const mainContainer = document.createElement("div");
 mainContainer.setAttribute("id", "main-container");
@@ -105,7 +107,7 @@ mainContainer.appendChild(mainTodoContainer);
 
 const mainContainerTitle = document.createElement("div");
 mainContainerTitle.setAttribute("id", "main-container-title");
-mainContainerTitle.textContent = defaultProject.textContent;
+mainContainerTitle.textContent = defaultProject.textContent.toUpperCase();
 mainTodoContainer.appendChild(mainContainerTitle);
 
 const todosContainer = document.createElement("div");

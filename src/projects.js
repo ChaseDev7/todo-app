@@ -1,8 +1,10 @@
 import './style.css';
 import { defaultProject } from ".";
 import { showTodoItem } from "./show-todo";
+import { updateDefaultProjectAmount } from '.';
 
 const projectList = [];
+projectList.textContent = "Project List";
 
 const resetContainers = () => {
   const bgForNewTodo = document.querySelector("#new-todo-bg");
@@ -16,6 +18,9 @@ const showDefaultProjectTodos = () => {
   const todosContainer = document.querySelector("#todos-container");
   todosContainer.innerHTML = "";
   defaultProject.sort((dd1, dd2) => (dd1.dueDate > dd2.dueDate) ? 1 : (dd1.dueDate < dd2.dueDate) ? -1 : 0);
+
+  const mainContainerTitle = document.querySelector("#main-container-title");
+  mainContainerTitle.textContent = defaultProject.textContent.toUpperCase();
 
   for (let i = 0; i < defaultProject.length; i++) {
     const todosContainer = document.querySelector("#todos-container");
@@ -62,19 +67,42 @@ const showDefaultProjectTodos = () => {
       todosContainer.removeChild(todoItemContainer);
       showDefaultProjectTodos();
       console.log(defaultProject);
+      updateDefaultProjectAmount();
     };
 
     showTodoItem();
   };
 };
 
+const showNewProjectTodos = () => {
+  const projectsInList = document.querySelectorAll(".project-list-item");
+
+  projectsInList.forEach((project) => {
+    project.addEventListener("click", function showProjectInMain () {
+      const projectTextInArray = projectList[project.dataset.projectTextId];
+
+      const mainContainerTitle = document.querySelector("#main-container-title");
+      mainContainerTitle.textContent = "";
+      mainContainerTitle.textContent = projectTextInArray.textContent;
+
+      let upperMainTitle = document.createElement("div");
+      upperMainTitle = mainContainerTitle.textContent.toUpperCase();
+      mainContainerTitle.textContent = upperMainTitle;
+
+      const todosContainer = document.querySelector("#todos-container");
+      todosContainer.innerHTML = "";
+    });
+  });
+};
+
 const showProjectsList = () => {
-  const todoList = document.querySelector("#todo-list");
-  todoList.innerHTML = "";
+  const newProjectList = document.querySelector("#project-list");
+  newProjectList.innerHTML = "";
   for (let i = 0; i < projectList.length; i++) {
     const projectListItem = document.createElement("div");
     projectListItem.classList.add("project-list-item");
-    todoList.appendChild(projectListItem);
+    projectListItem.setAttribute("data-project-text-id", i);
+    newProjectList.appendChild(projectListItem);
 
     // ---- Project text ----
     const projectText = document.createElement("div");
@@ -90,4 +118,6 @@ const showProjectsList = () => {
   };
 };
 
-export { showDefaultProjectTodos, showProjectsList, projectList };
+console.log(projectList);
+
+export { showDefaultProjectTodos, showNewProjectTodos, showProjectsList, projectList };

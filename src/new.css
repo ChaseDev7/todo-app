@@ -25,9 +25,9 @@
   background-color: white;
 }
 
-#new-todo-title-container {
+#new-todo-title-container, #new-project-title-container {
   background-color: var(--blue-color);
-  height: 30px;
+  height: 50px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -35,12 +35,17 @@
   border-radius: 0;
 }
 
-#new-todo-title {
+#new-todo-title, #new-project-title {
   padding: 5px;
   margin-left: 10px;
-  font-size: 14px;
+  font-size: 20px;
   font-weight: bold;
   color: white;
+}
+
+#close-button {
+  display: flex;
+  margin-right: 20px;
 }
 
 #form, #project-form {
@@ -95,7 +100,6 @@ input, textarea {
 
 #priority-fieldset {
   width: 100px;
-  margin-bottom: 50px;
   padding: 11px 11px 11px 12px;
   display: flex;
 }
@@ -165,6 +169,28 @@ textarea {
   pointer-events: none;
 }
 
+#project-fieldset {
+  margin: 10px 0 70px 12px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.default-project-name, .project-name {
+  cursor: pointer;
+  border: 1px solid var(--blue-color);
+  margin: 3px;
+  padding: 5px 10px;
+  color: var(--blue-color);
+  font-size: 12px;
+  border-radius: 10px;
+  transition: 0.7s;
+}
+
+.default-project-name:hover, .project-name:hover {
+  color: white;
+  background-color: var(--blue-color);;
+}
+
 #submit-todo-button, #submit-project-button {
   position: absolute;
   bottom: 10px;
@@ -204,14 +230,13 @@ textarea {
     box-shadow: 1px 1px 3px 1px var(--box-shadow-color);
   }
 
-  #new-todo-title-container {
-    background-color: var(--blue-color);
+  #new-todo-title-container, #new-project-title-container {
     height: 30px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     border-radius: 5px 5px 0 0;
     border: 1px solid var(--box-shadow-color);
+  }
+
+  #new-todo-title, #new-project-title {
+    font-size: 14px;
   }
 }

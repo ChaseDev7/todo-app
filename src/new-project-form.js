@@ -1,5 +1,7 @@
 import { showProjectsList } from "./projects";
 import { projectList } from "./projects";
+import { showNewProjectTodos } from "./projects";
+import './new.css';
 
 const newProjectArray = [];
 
@@ -18,11 +20,11 @@ const newProjectForm = () => {
   containerForNewTodo.style.display = "flex";
 
   const newProjectTitleContainer = document.createElement("div");
-  newProjectTitleContainer.setAttribute("id", "new-todo-title-container");
+  newProjectTitleContainer.setAttribute("id", "new-project-title-container");
   containerForNewTodo.appendChild(newProjectTitleContainer);
 
   const newProjectTitle = document.createElement("div");
-  newProjectTitle.setAttribute("id", "new-todo-title");
+  newProjectTitle.setAttribute("id", "new-project-title");
   newProjectTitle.textContent = "NEW PROJECT";
   newProjectTitleContainer.appendChild(newProjectTitle);
   
@@ -31,7 +33,8 @@ const newProjectForm = () => {
   containerForNewTodo.appendChild(projectForm);
 
   const closeButton = document.createElement("class");
-  closeButton.classList.add("id", "material-symbols-outlined");
+  closeButton.classList.add("material-symbols-outlined");
+  closeButton.setAttribute("id", "close-button");
   closeButton.textContent = "close";
   newProjectTitleContainer.appendChild(closeButton);
 
@@ -75,6 +78,7 @@ const addProjectToContainer = (event) => {
   console.log(projectList);
   showProjectsList();
   closeNewProjectForm();
+  showNewProjectTodos();
 };
 
 
