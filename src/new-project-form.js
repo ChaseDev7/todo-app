@@ -1,6 +1,7 @@
-// import { showProjectsList } from ".";
+import { showProjectsList } from "./projects";
+import { projectList } from "./projects";
 
-const projectsArray = [];
+const newProjectArray = [];
 
 const closeNewProjectForm = () => {
   const bgForNewTodo = document.querySelector("#new-todo-bg");
@@ -45,7 +46,7 @@ const newProjectForm = () => {
   const title = document.createElement("input");
   title.setAttribute("id", "project-title-input");
   title.setAttribute("type", "text");
-  title.setAttribute("maxlength", "50");
+  title.setAttribute("maxlength", "30");
   title.setAttribute("valueMissing", "false");
   title.setAttribute("placeholder", "Title: (max-length: 30 char)");
   title.setAttribute("required", "");
@@ -65,13 +66,16 @@ const newProjectForm = () => {
 const addProjectToContainer = (event) => {
   event.preventDefault();
   const title = document.querySelector("#project-title-input").value;
-  const newProject = { title: title, projectTodos: [] };
-  projectsArray.push(newProject);
-  console.log(projectsArray);
+  const newProject = newProjectArray.slice();
+  newProject.textContent = title;
+  // projectsArray.push(newProject);
+  // console.log(projectsArray);
 
-  // showProjectsList();
+  projectList.push(newProject);
+  console.log(projectList);
+  showProjectsList();
   closeNewProjectForm();
 };
 
 
-export { newProjectForm, projectsArray };
+export { newProjectForm };

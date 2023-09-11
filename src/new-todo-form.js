@@ -1,6 +1,8 @@
-import { projectArrayLength } from "./projects";
 import { defaultProject } from ".";
-import { showDefaultProjectList } from "./projects";
+import { updateDefaultProjectAmount } from ".";
+import { showDefaultProjectTodos } from "./projects";
+import { showProjectsList } from "./projects";
+import { showTodoItem } from "./show-todo";
 
 function Todo(title, description, dueDate, lowPriority, highPriority) {
   return { title, description, dueDate, lowPriority, highPriority };
@@ -133,11 +135,12 @@ const addTodoIntoList = (event) => {
   const highPriority = document.querySelector("#high-priority").checked;
 
   const newTodo = Todo(title, description, dueDate, lowPriority, highPriority);
-  defaultProject.projectTodos.push(newTodo);
-  console.log(defaultProject);
+  defaultProject.push(newTodo);
   closeNewToDoForm();
-  showDefaultProjectList();
-  projectArrayLength();
+  showDefaultProjectTodos();
+  updateDefaultProjectAmount();
+  showProjectsList();
+  showTodoItem();
 };
 
 

@@ -1,16 +1,16 @@
 import { defaultProject } from ".";
 
 const showTodoItem = () => {
-  const todoItemsInList = document.querySelectorAll(".todo-item");
+  const todoItemsTitleInList = document.querySelectorAll(".item-title-container");
 
-  todoItemsInList.forEach((todoItem) => {
+  todoItemsTitleInList.forEach((todoItem) => {
     todoItem.addEventListener("click", function showItemDetails () {
       const bgForNewTodo = document.querySelector("#new-todo-bg");
       bgForNewTodo.style.display = "flex";
       const containerForNewTodo = document.querySelector("#new-todo-container");
       containerForNewTodo.style.display = "flex";
       containerForNewTodo.innerHTML = "";
-      const todoItemInArray = defaultProject.projectTodos[todoItem.dataset.todoId];
+      const todoItemInArray = defaultProject[todoItem.dataset.todoId];
       const toDoItemContainer = document.createElement("div");
       toDoItemContainer.setAttribute("id", "new-todo-item-container");
       containerForNewTodo.appendChild(toDoItemContainer);

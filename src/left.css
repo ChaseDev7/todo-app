@@ -1,6 +1,6 @@
 #left-container {
   flex: 1;
-  min-width: 170px;
+  min-width: 185px;
   height: auto;
   background-color: white;
   display: none;
@@ -9,18 +9,35 @@
   background-color: rgb(243, 235, 235);
   border-right: 1px solid var(--box-shadow-color);
   transition: 0.7s;
+  box-shadow: 1px 1px 3px 1px var(--box-shadow-color);
 }
 
 #todo-list-container {
   margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
 }
 
 #todo-list {
   width: 100%;
-  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#default-project-container {
+  width: 85%;
+  margin: 10px 1px 1px 1px;
+  font-size: 15px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.7s;
 }
 
 .project-list-item {
@@ -36,17 +53,19 @@
   transition: 0.7s;
 }
 
-.project-list-item:hover {
+.project-list-item:hover, #default-project-container:hover {
   background-color: var(--border-color);
 }
 
 .project-text {
-  font-size: 15px;
+  font-size: 20px;
+  width: auto;
   font-weight: bold;
+  overflow-wrap: break-word;
 }
 
 .project-amount {
-  border-radius: 50%;
+  border-radius: 50px;
   background-color: var(--blue-color);
   color: white;
   width: 23px;
@@ -64,44 +83,33 @@
   background-color: white;
 }
 
-#bottom-todo-container {
+.buttons-container {
   width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: start;
-}
-
-#add-new-todo, #add-new-project {
-  font-size: 15px;
-  font-weight: bold;
-  border-radius: 5px;
-  color: var(--blue-color);
-  background-color: white;
-  margin: 5px 15px 15px 15px;
-  padding: 5px 10px;
-  border: 1px solid var(--blue-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: 0.7s;
-}
-
-#add-new-todo:hover, #add-new-project:hover {
-  background-color: var(--blue-color);
-  color: white;
+  margin: 15px 0;
+  justify-content: space-evenly;
 }
 
 @media (min-width: 500px) {
   #left-container {
     display: flex;
-    height: 90vh;
+    height: auto;
     max-height: auto;
+  }
+
+  .project-text {
+    width: 130px;
+    font-size: 15px;
+  }
+
+  .buttons-container {
+    display: none;
   }
 }
 
 @media (min-width: 900px) {
-  .project-text-text {
+  .project-text {
     font-size: 20px;
+    width: auto;
   }
 }
