@@ -5,10 +5,10 @@ import './new.css';
 import { newForm } from './new-todo-form';
 import { newProjectForm } from './new-project-form';
 import { showDefaultProjectTodos } from './projects';
+import { projectListArray } from './new-project-form';
 
 const defaultProject = [];
 defaultProject.textContent = "Default Project";
-console.log(defaultProject);
 
 const link = document.createElement("link");
 link.setAttribute("rel", "stylesheet");
@@ -45,38 +45,40 @@ const leftContainer = document.createElement("div");
 leftContainer.setAttribute("id", "left-container");
 container.appendChild(leftContainer);
 
-// ---- Container for PROJECTS TITLE and LIST ----
-const projectListContainer = document.createElement("div");
-projectListContainer.setAttribute("id", "project-list-container");
-leftContainer.appendChild(projectListContainer);
-
-// ---- Container for each Project ----
-const defaultProjectContainer = document.createElement("div");
-defaultProjectContainer.setAttribute("id", "default-project-container");
-projectListContainer.appendChild(defaultProjectContainer);
+const projectContainer = document.createElement("div");
+projectContainer.setAttribute("id", "project-container");
+leftContainer.appendChild(projectContainer);
 
 const projectList = document.createElement("div");
 projectList.setAttribute("id", "project-list");
-projectListContainer.appendChild(projectList);
+projectContainer.appendChild(projectList);
+
+const defaultProjectContainer = document.createElement("div");
+defaultProjectContainer.setAttribute("id", "default-project-container");
+projectContainer.appendChild(defaultProjectContainer);
+
+const defaultProjectListItem = document.createElement("div");
+defaultProjectListItem.setAttribute("id", "default-project-item");
+defaultProjectContainer.appendChild(defaultProjectListItem);
 
 // ---- Project text ----
-const projectText = document.createElement("div");
-projectText.classList.add("project-text");
-projectText.textContent = defaultProject.textContent;
-defaultProjectContainer.appendChild(projectText);
+const defaultProjectText = document.createElement("div");
+defaultProjectText.classList.add("default-project-text");
+defaultProjectText.textContent = defaultProject.textContent;
+defaultProjectListItem.appendChild(defaultProjectText);
 
 // ---- Number of Project todos ----
-const projectAmount = document.createElement("div");
-projectAmount.classList.add("project-amount");
+const defaultProjectAmount = document.createElement("div");
+defaultProjectAmount.classList.add("default-project-amount");
 
 const updateDefaultProjectAmount = () => {
-  projectAmount.textContent = defaultProject.length;
+  defaultProjectAmount.textContent = defaultProject.length;
 };
 
-defaultProjectContainer.addEventListener("click", showDefaultProjectTodos);
+defaultProjectListItem.addEventListener("click", showDefaultProjectTodos);
 
 updateDefaultProjectAmount();
-defaultProjectContainer.appendChild(projectAmount);
+defaultProjectListItem.appendChild(defaultProjectAmount);
 
 const buttonsContainer = document.createElement("div");
 buttonsContainer.classList.add("buttons-container");
@@ -127,6 +129,20 @@ const addNewProjectBottom = document.createElement("div");
 addNewProjectBottom.classList.add("add-new-project");
 addNewProjectBottom.textContent = "+ New Project";
 bottomButtonsContainer.appendChild(addNewProjectBottom);
+
+const checkProjects = document.createElement("button");
+checkProjects.textContent = "PROJECT LIST";
+checkProjects.addEventListener("click", function checkNameOfPRoject () {
+  console.log(projectListArray);
+});
+bottomButtonsContainer.appendChild(checkProjects);
+
+const checkDefaultProject = document.createElement("button");
+checkDefaultProject.textContent = "DEFAULT PROJECT";
+checkDefaultProject.addEventListener("click", function checkNameOfPRoject () {
+  console.log(defaultProject);
+});
+bottomButtonsContainer.appendChild(checkDefaultProject);
 
 addNewTodoBottom.addEventListener("click", newForm);
 

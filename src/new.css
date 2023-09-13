@@ -113,7 +113,7 @@ input, textarea {
   font-size: 15px;
 }
 
-label {
+label, #select-project-label {
   margin: 10px 10px 10px 12px;
   font-size: 15px;
   font-weight: 400;
@@ -163,30 +163,37 @@ textarea {
   resize: none;
 }
 
-.priority-option {
+/* .priority-option, .project-name, #default-project-name {
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
+} */
+
+#project-fieldset {
+  margin: 0 0 70px 12px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.project-option {
   position: fixed;
   opacity: 0;
   pointer-events: none;
 }
 
-#project-fieldset {
-  margin: 10px 0 70px 12px;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.default-project-name, .project-name {
+.project-label, #default-project-label {
   cursor: pointer;
   border: 1px solid var(--blue-color);
   margin: 3px;
   padding: 5px 10px;
   color: var(--blue-color);
   font-size: 12px;
+  font-weight: bold;
   border-radius: 10px;
   transition: 0.7s;
 }
 
-.default-project-name:hover, .project-name:hover {
+.project-label:hover, #default-project-label:hover {
   color: white;
   background-color: var(--blue-color);;
 }
@@ -238,5 +245,9 @@ textarea {
 
   #new-todo-title, #new-project-title {
     font-size: 14px;
+  }
+
+  #close-button {
+    margin-right: 10px;
   }
 }

@@ -1,8 +1,8 @@
 import { showProjectsList } from "./projects";
-import { projectList } from "./projects";
-import { showNewProjectTodos } from "./projects";
 import './new.css';
 
+const projectListArray = [];
+projectListArray.textContent = "Project List";
 const newProjectArray = [];
 
 const closeNewProjectForm = () => {
@@ -71,15 +71,10 @@ const addProjectToContainer = (event) => {
   const title = document.querySelector("#project-title-input").value;
   const newProject = newProjectArray.slice();
   newProject.textContent = title;
-  // projectsArray.push(newProject);
-  // console.log(projectsArray);
-
-  projectList.push(newProject);
-  console.log(projectList);
-  showProjectsList();
+  projectListArray.push(newProject);
+  showProjectsList(newProject);
   closeNewProjectForm();
-  showNewProjectTodos();
 };
 
 
-export { newProjectForm };
+export { newProjectForm, addProjectToContainer, projectListArray };

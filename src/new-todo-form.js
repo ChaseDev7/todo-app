@@ -1,14 +1,13 @@
 import { defaultProject } from ".";
-import { projectList } from "./projects";
 import { updateDefaultProjectAmount } from ".";
 import { showDefaultProjectTodos } from "./projects";
-import { showProjectsList } from "./projects";
 import { showTodoItem } from "./show-todo";
-import { showNewProjectTodos } from "./projects";
+import { showProjectsList } from "./projects";
+import { projectListArray } from "./new-project-form";
 import './new.css';
 
-function Todo(title, description, dueDate, lowPriority, highPriority) {
-  return { title, description, dueDate, lowPriority, highPriority };
+function Todo(newTitle, newDescription, newDueDate, lowPriority, highPriority ) {
+  return { newTitle, newDescription, newDueDate, lowPriority, highPriority };
 };
 
 const closeNewToDoForm = () => {
@@ -118,51 +117,84 @@ const newForm = () => {
   highPriorityLabel.setAttribute("id", "high-priority-label");
   highPriorityLabel.textContent = "HIGH";
   priorityFieldset.appendChild(highPriorityLabel);
+  
+  const projectLabel = document.createElement("div");
+  projectLabel.setAttribute("id", "select-project-label");
+  projectLabel.textContent = "Choose Project to add Todo:";
+  todoForm.appendChild(projectLabel);
 
   const projectFieldset = document.createElement("fieldset");
   projectFieldset.setAttribute("id", "project-fieldset");
   todoForm.appendChild(projectFieldset);
 
-  const defaultProjectName = document.createElement("div");
-  defaultProjectName.classList.add("default-project-name");
-  defaultProjectName.textContent = defaultProject.textContent.toUpperCase();
-  projectFieldset.appendChild(defaultProjectName);
+  const defaultProjectRadio = document.createElement("input");
+  defaultProjectRadio.setAttribute("type", "radio");
+  defaultProjectRadio.setAttribute("id", "default-project-name");
+  defaultProjectRadio.setAttribute("name", "project-name");
+  defaultProjectRadio.setAttribute("checked", "");
+  projectFieldset.appendChild(defaultProjectRadio);
 
-  for (let i = 0; i < projectList.length; i++) {
-    const projectName = document.createElement("div");
-    projectName.classList.add("project-name");
-    projectName.textContent = projectList[i].textContent.toUpperCase();
-    projectFieldset.appendChild(projectName);
+  const defaultProjectLabel = document.createElement("label");
+  defaultProjectLabel.setAttribute("for", "default-project-name");
+  defaultProjectLabel.setAttribute("id", "default-project-label");
+  defaultProjectLabel.textContent = defaultProject.textContent;
+  projectFieldset.appendChild(defaultProjectLabel);
+  
+  for (let i = 0; i < projectListArray.length; i++) {
+    const newProjectRadio = document.createElement("input");
+    newProjectRadio.setAttribute("type", "radio");
+    newProjectRadio.classList.add("project-name");
+    newProjectRadio.setAttribute("name", "project-name");
+    newProjectRadio.setAttribute("id", `project-index-${i}`);
+    newProjectRadio.setAttribute("value", `project-index-${i}`);
+    newProjectRadio.setAttribute("data-project-id", i);
+    projectFieldset.appendChild(newProjectRadio);
+
+    const newProjectLabel = document.createElement("label");
+    newProjectLabel.setAttribute("for", `project-index-${i}`);
+    newProjectLabel.classList.add("project-label");
+    newProjectLabel.textContent = projectListArray[i].textContent;
+    projectFieldset.appendChild(newProjectLabel);
   };
 
   const submitToDoFormButton = document.createElement("input");
   submitToDoFormButton.setAttribute("type", "submit");
   submitToDoFormButton.setAttribute("id", "submit-todo-button");
-  submitToDoFormButton.setAttribute("value", "Submit Todo");
+  submitToDoFormButton.setAttribute("value", "Complete Todo");
   todoForm.appendChild(submitToDoFormButton);
 
-  submitToDoFormButton.addEventListener("click", addTodoIntoList);
+  const addTodoToList = (event) => {
+    event.preventDefault();
+
+    const newTitle = document.querySelector("#title-input").value;
+    const newDescription = document.querySelector("#description-textarea").value;
+    const newDueDate = document.querySelector("#due-date").value;
+    const lowPriority = document.querySelector("#low-priority").checked;
+    const highPriority = document.querySelector("#high-priority").checked;
+  
+    const newTodo = Todo(newTitle, newDescription, newDueDate, lowPriority, highPriority);
+
+    if (defaultProjectRadio.checked == true) {
+      defaultProject.push(newTodo);
+      console.log(newTodo);
+    }
+
+    for (let i = 0; i < projectListArray.length; i++) {
+      const newProjectRadio = document.querySelectorAll(".project-name");
+      if (newProjectRadio[i].checked == true) {
+        projectListArray[i].push(newTodo);
+      };
+    };
+
+    closeNewToDoForm();
+    showDefaultProjectTodos();
+    updateDefaultProjectAmount();
+    showTodoItem();
+  };
+
+  submitToDoFormButton.addEventListener("click", addTodoToList);
 
   closeButton.addEventListener("click", closeNewToDoForm);
 };
-
-const addTodoIntoList = (event) => {
-  event.preventDefault();
-  const title = document.querySelector("#title-input").value;
-  const description = document.querySelector("#description-textarea").value;
-  const dueDate = document.querySelector("#due-date").value;
-  const lowPriority = document.querySelector("#low-priority").checked;
-  const highPriority = document.querySelector("#high-priority").checked;
-
-  const newTodo = Todo(title, description, dueDate, lowPriority, highPriority);
-  defaultProject.push(newTodo);
-  closeNewToDoForm();
-  showDefaultProjectTodos();
-  updateDefaultProjectAmount();
-  showProjectsList();
-  showTodoItem();
-  showNewProjectTodos();
-};
-
 
 export { newForm };

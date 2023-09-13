@@ -1,10 +1,8 @@
 import './style.css';
 import { defaultProject } from ".";
 import { showTodoItem } from "./show-todo";
+import { projectListArray } from './new-project-form';
 import { updateDefaultProjectAmount } from '.';
-
-const projectList = [];
-projectList.textContent = "Project List";
 
 const resetContainers = () => {
   const bgForNewTodo = document.querySelector("#new-todo-bg");
@@ -33,7 +31,7 @@ const showDefaultProjectTodos = () => {
     todoItemContainer.appendChild(itemTitleContainer);
     const todoItemTitle = document.createElement("div");
     todoItemTitle.classList.add("item-title");
-    todoItemTitle.textContent = defaultProject[i].title;
+    todoItemTitle.textContent = defaultProject[i].newTitle;
     itemTitleContainer.appendChild(todoItemTitle);
     let itemHighPriority = defaultProject[i].highPriority;
     if (itemHighPriority == true) {
@@ -47,7 +45,7 @@ const showDefaultProjectTodos = () => {
     todoItemContainer.appendChild(itemDetailsContainer);
     const itemDueDate = document.createElement("div");
     itemDueDate.classList.add("item-due-date");
-    itemDueDate.textContent = defaultProject[i].dueDate;
+    itemDueDate.textContent = defaultProject[i].newDueDate;
     itemDetailsContainer.appendChild(itemDueDate);
     const editIcon = document.createElement("class");
     editIcon.setAttribute("id", "edit-icon");
@@ -66,28 +64,42 @@ const showDefaultProjectTodos = () => {
       defaultProject.splice(itemTitleContainer.dataset.todoId, 1);
       todosContainer.removeChild(todoItemContainer);
       showDefaultProjectTodos();
-      console.log(defaultProject);
       updateDefaultProjectAmount();
+      console.log(defaultProject);
     };
 
     showTodoItem();
   };
 };
 
-const showNewProjectTodos = () => {
-  const projectsInList = document.querySelectorAll(".project-list-item");
+const showProjectsList = () => {
+  const newProjectList = document.querySelector("#project-list");
+  newProjectList.innerHTML = "";
 
-  projectsInList.forEach((project) => {
-    project.addEventListener("click", function showProjectInMain () {
-      const projectTextInArray = projectList[project.dataset.projectTextId];
+  for (let i = 0; i < projectListArray.length; i++) {
+    const projectListItem = document.createElement("div");
+    projectListItem.classList.add("project-list-item");
+    newProjectList.appendChild(projectListItem);
 
+    // ---- Project text ----
+    const projectText = document.createElement("div");
+    projectText.classList.add("project-text");
+    projectText.innerText = projectListArray[i].textContent;
+    projectListItem.appendChild(projectText);
+
+    // ---- Number of Project todos ----
+    const projectAmount = document.createElement("div");
+    projectAmount.classList.add("project-amount");
+    projectAmount.innerText = projectListArray[i].length;
+    projectListItem.appendChild(projectAmount);
+  };
+
+  const projectTitlesInList = document.querySelectorAll(".project-text");
+
+  projectTitlesInList.forEach((projectTitle) => {
+    projectTitle.addEventListener("click", function changeMainTitle () {
       const mainContainerTitle = document.querySelector("#main-container-title");
-      mainContainerTitle.textContent = "";
-      mainContainerTitle.textContent = projectTextInArray.textContent;
-
-      let upperMainTitle = document.createElement("div");
-      upperMainTitle = mainContainerTitle.textContent.toUpperCase();
-      mainContainerTitle.textContent = upperMainTitle;
+      mainContainerTitle.textContent = projectTitle.textContent.toUpperCase();
 
       const todosContainer = document.querySelector("#todos-container");
       todosContainer.innerHTML = "";
@@ -95,29 +107,4 @@ const showNewProjectTodos = () => {
   });
 };
 
-const showProjectsList = () => {
-  const newProjectList = document.querySelector("#project-list");
-  newProjectList.innerHTML = "";
-  for (let i = 0; i < projectList.length; i++) {
-    const projectListItem = document.createElement("div");
-    projectListItem.classList.add("project-list-item");
-    projectListItem.setAttribute("data-project-text-id", i);
-    newProjectList.appendChild(projectListItem);
-
-    // ---- Project text ----
-    const projectText = document.createElement("div");
-    projectText.classList.add("project-text");
-    projectText.textContent = projectList[i].textContent;
-    projectListItem.appendChild(projectText);
-
-    // ---- Number of Project todos ----
-    const projectAmount = document.createElement("div");
-    projectAmount.classList.add("project-amount");
-    projectAmount.textContent = projectList[i].length;
-    projectListItem.appendChild(projectAmount);
-  };
-};
-
-console.log(projectList);
-
-export { showDefaultProjectTodos, showNewProjectTodos, showProjectsList, projectList };
+export { showDefaultProjectTodos, showProjectsList };

@@ -23,15 +23,16 @@ const showTodoItem = () => {
       toDoItemTitleNavbar.appendChild(todoItemText);
       const toDoItemTitle = document.createElement("div");
       toDoItemTitle.setAttribute("id", "new-todo-item-title");
-      toDoItemTitle.textContent = todoItemInArray.title;
+      toDoItemTitle.textContent = todoItemInArray.newTitle;
       toDoItemContainer.appendChild(toDoItemTitle);
-      const closeTodoItemBtn = document.createElement("span");
+      const closeTodoItemBtn = document.createElement("class");
       closeTodoItemBtn.classList.add("material-symbols-outlined");
+      closeTodoItemBtn.setAttribute("id", "close-button");
       closeTodoItemBtn.textContent = "close";
       toDoItemTitleNavbar.appendChild(closeTodoItemBtn);
       const toDoItemDueDate = document.createElement("div");
       toDoItemDueDate.setAttribute("id", "new-todo-item-due-date");
-      toDoItemDueDate.textContent = `Due date: ${todoItemInArray.dueDate}`;
+      toDoItemDueDate.textContent = `Due date: ${todoItemInArray.newDueDate}`;
       toDoItemContainer.appendChild(toDoItemDueDate);
       const toDoItemPriority = document.createElement("div");
       toDoItemPriority.setAttribute("id", "new-todo-item-priority");
@@ -52,7 +53,7 @@ const showTodoItem = () => {
       toDoItemContainer.appendChild(toDoItemPriority);
       const toDoItemDescription = document.createElement("div");
       toDoItemDescription.setAttribute("id", "new-todo-item-description");
-      toDoItemDescription.textContent = `Description: ${todoItemInArray.description}`;
+      toDoItemDescription.textContent = `Description: ${todoItemInArray.newDescription}`;
       toDoItemContainer.appendChild(toDoItemDescription);
 
       const resetNewToDoContainer = () => {
