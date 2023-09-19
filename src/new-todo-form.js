@@ -1,17 +1,30 @@
 import { defaultProject } from ".";
+import { updateProjectList } from "./show-todo-list";
+import { projectListArray } from ".";
 
 const Todo = (title, description, dueDate, lowPriority, highPriority) => {
   return { title, description, dueDate, lowPriority, highPriority };
 };
 
 const addTodoForm = () => {
-  const formBackground = document.createElement("div");
-  formBackground.classList.add("form-background");
-  document.body.appendChild(formBackground);
+  const todoBackground = document.createElement("div");
+  todoBackground.setAttribute("id", "todo-background");
+  document.body.appendChild(todoBackground);
+
+  const formContainer = document.createElement("div");
+  formContainer.setAttribute("id", "form-container");
+  document.body.appendChild(formContainer);
+
+  const cancelTodoButton = document.createElement("button");
+  cancelTodoButton.setAttribute("id", "cancel-todo-button");
+  cancelTodoButton.textContent = "X";
+  formContainer.appendChild(cancelTodoButton);
+
+  cancelTodoButton.addEventListener("click", removeTodoForm);
 
   const newTodoForm = document.createElement("form");
   newTodoForm.setAttribute("id", "new-todo-form");
-  formBackground.appendChild(newTodoForm);
+  formContainer.appendChild(newTodoForm);
 
   const titleFieldset = document.createElement("fieldset");
   titleFieldset.setAttribute("id", "title-fieldset");
@@ -84,6 +97,42 @@ const addTodoForm = () => {
   highPriorityLabel.textContent = "HIGH";
   priorityTitle.appendChild(highPriorityLabel);
 
+  const projectLabel = document.createElement("fieldset");
+  projectLabel.setAttribute("id", "select-project-label");
+  projectLabel.textContent = "Choose Project to add Todo:";
+  newTodoForm.appendChild(projectLabel);
+
+  const projectFieldset = document.createElement("fieldset");
+  projectFieldset.setAttribute("id", "project-fieldset");
+  newTodoForm.appendChild(projectFieldset);
+
+  const defaultProjectRadio = document.createElement("input");
+  defaultProjectRadio.setAttribute("type", "radio");
+  defaultProjectRadio.setAttribute("id", "default-project-name");
+  defaultProjectRadio.setAttribute("name", "project-name");
+  defaultProjectRadio.setAttribute("checked", "");
+  projectFieldset.appendChild(defaultProjectRadio);
+
+  const defaultProjectLabel = document.createElement("label");
+  defaultProjectLabel.setAttribute("for", "default-project-name");
+  defaultProjectLabel.setAttribute("id", "default-project-label");
+  defaultProjectLabel.textContent = defaultProject.textContent;
+  projectFieldset.appendChild(defaultProjectLabel);
+
+  for (let i = 1; i < projectListArray.length; i++) {
+    const newProjectRadio = document.createElement("input");
+    newProjectRadio.setAttribute("type", "radio");
+    newProjectRadio.classList.add("project-name");
+    newProjectRadio.setAttribute("id", `project-index-${i}`);
+    projectFieldset.appendChild(newProjectRadio);
+
+    const newProjectLabel = document.createElement("label");
+    newProjectLabel.setAttribute("for", `project-index-${i}`);
+    newProjectLabel.classList.add("project-label");
+    newProjectLabel.textContent = projectListArray[i].textContent;
+    projectFieldset.appendChild(newProjectLabel);
+  };
+
   const submitTodoButton = document.createElement("button");
   submitTodoButton.setAttribute("id", "submit-project-button");
   submitTodoButton.textContent = "Submit Todo";
@@ -95,8 +144,6 @@ const addTodoForm = () => {
 const submitTodoForm = (event) => {
   event.preventDefault();
 
-  const formBackground = document.querySelector(".form-background");
-
   const title = document.querySelector("#todo-title-input").value;
   const description = document.querySelector("#description-textarea").value;
   const dueDate = document.querySelector("#todo-due-date-input").value;
@@ -107,7 +154,16 @@ const submitTodoForm = (event) => {
 
   defaultProject.push(newTodo);
 
-  document.body.removeChild(formBackground);
+  updateProjectList();
+  removeTodoForm();
+};
+
+const removeTodoForm = () => {
+  const todoBackground = document.querySelector("#todo-background");
+  document.body.removeChild(todoBackground);
+
+  const formContainer = document.querySelector("#form-container");
+  document.body.removeChild(formContainer);
 };
 
 export { addTodoForm, submitTodoForm };

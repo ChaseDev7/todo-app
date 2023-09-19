@@ -1,6 +1,7 @@
 import './style.css';
-import { addProjectForm } from './project-form';
-import { addTodoForm } from './new-todo';
+import { addProjectForm } from './new-project-form';
+import { addTodoForm } from "./new-todo-form";
+import { updateProjectList } from './show-todo-list';
 
 const projectListArray = [];
 projectListArray.textContent = "Project List";
@@ -8,6 +9,33 @@ projectListArray.textContent = "Project List";
 const defaultProject = [];
 defaultProject.textContent = "Default Project";
 projectListArray.push(defaultProject);
+
+const libraryApp = [];
+libraryApp.textContent = "Library App";
+projectListArray.push(libraryApp);
+
+const restaurantPage = [];
+restaurantPage.textContent = "Restaurant Page";
+projectListArray.push(restaurantPage);
+
+const todoItemOne = {
+  title: "New todo", 
+  description: "Things to read", 
+  dueDate: "", 
+  lowPriority: false, 
+  highPriority: true
+};
+
+const todoItemTwo = {
+  title: "Add edit button", 
+  description: "Need to add button in order to edit details!", 
+  dueDate: "", 
+  lowPriority: true, 
+  highPriority: false
+};
+
+defaultProject.push(todoItemOne);
+defaultProject.push(todoItemTwo);
 
 const navBar = document.createElement("div");
 navBar.setAttribute("id", "nav-bar");
@@ -34,17 +62,6 @@ const projectList = document.createElement("div");
 projectList.setAttribute("id", "project-list");
 leftContainer.appendChild(projectList);
 
-const updateProjectList = () => {
-  projectList.innerHTML = "";
-  
-  for (let i = 0; i < projectListArray.length; i++) {
-    const projectListItem = document.createElement("div");
-    projectListItem.classList.add("project-list-item");
-    projectListItem.textContent = projectListArray[i].textContent.toUpperCase();
-    projectList.appendChild(projectListItem);
-  };
-};
-
 updateProjectList();
 
 const rightContainer = document.createElement("div");
@@ -56,16 +73,11 @@ addTodoButton.setAttribute("id", "add-todo-button");
 addTodoButton.textContent = "Add Todo";
 rightContainer.appendChild(addTodoButton);
 
+addTodoButton.addEventListener("click", addTodoForm);
+
 const todosContainer = document.createElement("div");
 todosContainer.setAttribute("id", "todos-container");
 rightContainer.appendChild(todosContainer);
-
-const todosList = document.createElement("div");
-todosList.setAttribute("id", "todos-list");
-todosList.textContent = "CONTENT";
-todosContainer.appendChild(todosList);
-
-addTodoButton.addEventListener("click", addTodoForm);
 
 const newProjectButton = document.createElement("button");
 newProjectButton.setAttribute("id", "new-project-button");
@@ -92,4 +104,4 @@ checkDefaultProject.addEventListener("click", function checkDefaultProject () {
 
 newProjectButton.addEventListener("click", addProjectForm);
 
-export { defaultProject, projectListArray, updateProjectList };
+export { defaultProject, projectListArray };

@@ -13,6 +13,9 @@
 body {
   margin: 0;
   font-family: 'Roboto';
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #nav-bar {
@@ -93,9 +96,27 @@ body {
 
 #todos-container {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.form-background {
+.todo-item {
+  padding: 10px;
+  width: 80%;
+  display: flex;
+  margin: 5px;
+  border-bottom: 1px solid rgb(169, 164, 164);
+  transition: 0.7s;
+}
+
+.todo-item:hover {
+  cursor: pointer;
+  color: white;
+  background-color: rgb(62, 167, 253);
+}
+
+#project-background, #todo-background {
   position: fixed;
   top: 0;
   right: 0;
@@ -104,20 +125,24 @@ body {
   background-color: white;
   opacity: 0.7;
   z-index: 0;
+}
+
+#form-container {
+  position: fixed;
+  width: 40vw;
+  height: 60vh;
+  z-index: 1;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  align-items: end;
 }
 
 #new-project-form, #new-todo-form {
-  margin: 10px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 5px;
-  padding: 0 10px 10px 10px;
-  width: 300px;
-  height: auto;
+  padding: 10px;
   background-color: white;
   border: 1px solid gray;
   box-shadow: 0px 0px 5px 1px rgb(170, 162, 162);
@@ -149,7 +174,7 @@ body {
 
 fieldset {
   border: none;
-  width: 300px;
+  width: 400px;
   padding: 5px 0;
   margin: 0;
 }
@@ -165,7 +190,7 @@ input, #project-title {
 }
 
 #project-title {
-  margin: 20px;
+  margin: 10px;
 }
 
 textarea {
@@ -186,6 +211,10 @@ textarea {
 
 #due-date-label, #priority-title {
   margin: 0 20px;
+}
+
+#select-project-label {
+  padding-left: 20px;
 }
 
 #todo-due-date-input {
@@ -238,10 +267,31 @@ textarea {
   cursor: pointer;
 }
 
-.priority-option {
+.priority-option, #default-project-name, .project-name {
   position: fixed;
   opacity: 0;
   pointer-events: none;
+}
+
+#project-fieldset {
+  display: flex;
+}
+
+#default-project-label, .project-label {
+  color: rgb(62, 167, 253);
+  border: 1px solid rgb(62, 167, 253);
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 2px;
+  border-radius: 10px;
+  transition: 0.7s;
+}
+
+#default-project-label:hover, .project-label:hover {
+  color: white;
+  background-color: rgb(62, 167, 253);
+  cursor: pointer;
 }
 
 #submit-project-button {
@@ -259,6 +309,27 @@ textarea {
 }
 
 #submit-project-button:hover {
+  background-color: rgb(62, 167, 253);
+  color: white;
+}
+
+#cancel-project-button, #cancel-todo-button {
+  width: 20px;
+  height: 20px;
+  border: none;
+  background-color: white;
+  color: rgb(62, 167, 253);
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+  transition: 0.7s;
+}
+
+#cancel-project-button:hover, #cancel-todo-button:hover {
   background-color: rgb(62, 167, 253);
   color: white;
 }

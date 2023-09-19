@@ -1,16 +1,27 @@
 import { projectListArray } from ".";
-import { updateProjectList } from ".";
+import { updateProjectList } from "./show-todo-list";
 
 const project = [];
 
 const addProjectForm = () => {
-  const formBackground = document.createElement("div");
-  formBackground.classList.add("form-background");
-  document.body.appendChild(formBackground);
+  const projectBackground = document.createElement("div");
+  projectBackground.setAttribute("id", "project-background");
+  document.body.appendChild(projectBackground);
+
+  const formContainer = document.createElement("div");
+  formContainer.setAttribute("id", "form-container");
+  document.body.appendChild(formContainer);
+
+  const cancelProjectButton = document.createElement("button");
+  cancelProjectButton.setAttribute("id", "cancel-project-button");
+  cancelProjectButton.textContent = "X";
+  formContainer.appendChild(cancelProjectButton);
+
+  cancelProjectButton.addEventListener("click", removeProjectForm);
 
   const newProjectForm = document.createElement("form");
   newProjectForm.setAttribute("id", "new-project-form");
-  formBackground.appendChild(newProjectForm);
+  formContainer.appendChild(newProjectForm);
 
   const projectTitle = document.createElement("input");
   projectTitle.setAttribute("id", "project-title");
@@ -27,8 +38,6 @@ const addProjectForm = () => {
 
 const submitProjectForm = (event) => {
   event.preventDefault();
-
-  const formBackground = document.querySelector(".form-background");
   
   const title = document.querySelector("#project-title").value;
 
@@ -37,8 +46,16 @@ const submitProjectForm = (event) => {
   console.log(newProjectArray);
   projectListArray.push(newProjectArray);
 
-  document.body.removeChild(formBackground);
   updateProjectList();
+  removeProjectForm();
+};
+
+const removeProjectForm = () => {
+  const projectBackground = document.querySelector("#project-background");
+  document.body.removeChild(projectBackground);
+
+  const formContainer = document.querySelector("#form-container");
+  document.body.removeChild(formContainer);
 };
 
 export { addProjectForm, submitProjectForm };
