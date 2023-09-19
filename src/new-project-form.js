@@ -12,10 +12,14 @@ const addProjectForm = () => {
   formContainer.setAttribute("id", "form-container");
   document.body.appendChild(formContainer);
 
+  const cancelButtonContainer = document.createElement("div");
+  cancelButtonContainer.setAttribute("id", "cancel-project-button-container");
+  formContainer.appendChild(cancelButtonContainer);
+
   const cancelProjectButton = document.createElement("button");
   cancelProjectButton.setAttribute("id", "cancel-project-button");
   cancelProjectButton.textContent = "X";
-  formContainer.appendChild(cancelProjectButton);
+  cancelButtonContainer.appendChild(cancelProjectButton);
 
   cancelProjectButton.addEventListener("click", removeProjectForm);
 

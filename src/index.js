@@ -3,6 +3,11 @@ import { addProjectForm } from './new-project-form';
 import { addTodoForm } from "./new-todo-form";
 import { updateProjectList } from './show-todo-list';
 
+const link = document.createElement("link");
+link.setAttribute("rel", "stylesheet");
+link.setAttribute("href", "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0");
+document.head.appendChild(link);
+
 const projectListArray = [];
 projectListArray.textContent = "Project List";
 
@@ -21,7 +26,7 @@ projectListArray.push(restaurantPage);
 const todoItemOne = {
   title: "New todo", 
   description: "Things to read", 
-  dueDate: "", 
+  dueDate: "2023-09-19", 
   lowPriority: false, 
   highPriority: true
 };
@@ -29,7 +34,7 @@ const todoItemOne = {
 const todoItemTwo = {
   title: "Add edit button", 
   description: "Need to add button in order to edit details!", 
-  dueDate: "", 
+  dueDate: "2023-09-30", 
   lowPriority: true, 
   highPriority: false
 };

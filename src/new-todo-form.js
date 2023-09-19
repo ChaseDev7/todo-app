@@ -1,5 +1,5 @@
 import { defaultProject } from ".";
-import { updateProjectList } from "./show-todo-list";
+import { showTodosList } from "./show-todo-list";
 import { projectListArray } from ".";
 
 const Todo = (title, description, dueDate, lowPriority, highPriority) => {
@@ -15,10 +15,14 @@ const addTodoForm = () => {
   formContainer.setAttribute("id", "form-container");
   document.body.appendChild(formContainer);
 
+  const cancelButtonContainer = document.createElement("div");
+  cancelButtonContainer.setAttribute("id", "cancel-todo-button-container");
+  formContainer.appendChild(cancelButtonContainer);
+
   const cancelTodoButton = document.createElement("button");
   cancelTodoButton.setAttribute("id", "cancel-todo-button");
   cancelTodoButton.textContent = "X";
-  formContainer.appendChild(cancelTodoButton);
+  cancelButtonContainer.appendChild(cancelTodoButton);
 
   cancelTodoButton.addEventListener("click", removeTodoForm);
 
@@ -109,6 +113,7 @@ const addTodoForm = () => {
   const defaultProjectRadio = document.createElement("input");
   defaultProjectRadio.setAttribute("type", "radio");
   defaultProjectRadio.setAttribute("id", "default-project-name");
+  defaultProjectRadio.classList.add("project-name");
   defaultProjectRadio.setAttribute("name", "project-name");
   defaultProjectRadio.setAttribute("checked", "");
   projectFieldset.appendChild(defaultProjectRadio);
@@ -123,6 +128,7 @@ const addTodoForm = () => {
     const newProjectRadio = document.createElement("input");
     newProjectRadio.setAttribute("type", "radio");
     newProjectRadio.classList.add("project-name");
+    newProjectRadio.setAttribute("name", "project-name");
     newProjectRadio.setAttribute("id", `project-index-${i}`);
     projectFieldset.appendChild(newProjectRadio);
 
@@ -152,9 +158,16 @@ const submitTodoForm = (event) => {
 
   const newTodo = Todo(title, description, dueDate, lowPriority, highPriority);
 
-  defaultProject.push(newTodo);
+  for (let i = 0; i < projectListArray.length; i++) {
+    const newProjectRadio = document.querySelectorAll(".project-name");
+    if (newProjectRadio[i].checked == true) {
+      projectListArray[i].push(newTodo);
+    };
+  };
 
-  updateProjectList();
+  const todosContainer = document.querySelector("#todos-container");
+  todosContainer.innerHTML = "";
+
   removeTodoForm();
 };
 

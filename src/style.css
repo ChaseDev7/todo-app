@@ -105,6 +105,8 @@ body {
   padding: 10px;
   width: 80%;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin: 5px;
   border-bottom: 1px solid rgb(169, 164, 164);
   transition: 0.7s;
@@ -114,6 +116,56 @@ body {
   cursor: pointer;
   color: white;
   background-color: rgb(62, 167, 253);
+}
+
+.todo-item-left-container {
+  display: flex;
+  width: 50%;
+}
+
+.todo-item-title {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.todo-item-right-container {
+  display: flex;
+  align-items: center;
+}
+
+.todo-item-high-priority {
+  margin-left: 5px;
+  color: white;
+  background-color: rgb(215, 45, 45);
+  padding: 2px 5px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.todo-item-due-date {
+  margin-right: 10px;
+}
+
+#edit-icon, #delete-icon {
+  object-fit: cover;
+  padding: 5px;
+  border-radius: 50%;
+  color: white;
+  background-color: rgb(62, 167, 253);
+  margin: 0 5px 2px 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.7s;
+}
+
+#edit-icon:hover, #delete-icon:hover {
+  color: rgb(62, 167, 253);
+  background-color: white;
 }
 
 #project-background, #todo-background {
@@ -129,12 +181,25 @@ body {
 
 #form-container {
   position: fixed;
-  width: 40vw;
-  height: 60vh;
+  width: 100vw;
+  height: 100vh;
   z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: end;
+  justify-content: center;
+  align-items: center;
+}
+
+#cancel-todo-button-container {
+  width: 400px;
+  display: flex;
+  justify-content: end;
+}
+
+#cancel-project-button-container {
+  width: 250px;
+  display: flex;
+  justify-content: end;
 }
 
 #new-project-form, #new-todo-form {
@@ -148,7 +213,7 @@ body {
   box-shadow: 0px 0px 5px 1px rgb(170, 162, 162);
 }
 
-#new-project-button, #check-projects-button, #check-default-project-button, #add-todo-button {
+#new-project-button, #check-projects-button, #check-default-project-button {
   width: 150px;
   cursor: pointer;
   border: 1px solid white;
@@ -162,14 +227,23 @@ body {
   transition: 0.7s;
 }
 
+#add-todo-button {
+  width: 150px;
+  cursor: pointer;
+  border: 1px solid rgb(62, 167, 253);
+  margin: 20px 30px;
+  color: rgb(62, 167, 253);
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 20px;
+  padding: 5px 20px;
+  background-color: white;
+  transition: 0.7s;
+}
+
 #new-project-button:hover, #add-todo-button:hover {
   background-color: rgb(62, 167, 253);
   color: white;
-}
-
-#add-todo-button {
-  margin: 10px;
-  border: 1px solid rgb(62, 167, 253);
 }
 
 fieldset {
@@ -251,8 +325,8 @@ textarea {
 }
 
 #high-priority-label {
-  color: rgb(177, 28, 28);
-  border: 2px solid rgb(177, 28, 28);
+  color: rgb(215, 45, 45);
+  border: 2px solid rgb(215, 45, 45);
   transition: 0.7s;
   font-size: 12px;
   font-weight: bold;
@@ -263,7 +337,7 @@ textarea {
 
 #high-priority-label:hover {
   color: white;
-  background-color: rgb(177, 28, 28);
+  background-color: rgb(215, 45, 45);
   cursor: pointer;
 }
 
