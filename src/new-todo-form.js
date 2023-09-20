@@ -1,6 +1,6 @@
 import { defaultProject } from ".";
-import { showTodosList } from "./show-todo-list";
 import { projectListArray } from ".";
+import { updateProjectList } from "./show-todo-list";
 
 const Todo = (title, description, dueDate, lowPriority, highPriority) => {
   return { title, description, dueDate, lowPriority, highPriority };
@@ -38,7 +38,7 @@ const addTodoForm = () => {
   todoTitle.setAttribute("id", "todo-title-input");
   todoTitle.setAttribute("type", "text");
   todoTitle.setAttribute("maxlength", "50");
-  todoTitle.setAttribute("placeholder", "Title: (max-length: 50 char)");
+  todoTitle.setAttribute("placeholder", "Entere Todo Title");
   todoTitle.required = true;
   titleFieldset.appendChild(todoTitle);
 
@@ -79,6 +79,7 @@ const addTodoForm = () => {
   const lowPriorityOption = document.createElement("input");
   lowPriorityOption.setAttribute("type", "radio");
   lowPriorityOption.classList.add("priority-option");
+  lowPriorityOption.setAttribute("name", "priority-option");
   lowPriorityOption.setAttribute("id", "low-priority");
   lowPriorityOption.setAttribute("checked", "");
   priorityTitle.appendChild(lowPriorityOption);
@@ -92,6 +93,7 @@ const addTodoForm = () => {
   const highPriorityOption = document.createElement("input");
   highPriorityOption.setAttribute("type", "radio");
   highPriorityOption.classList.add("priority-option");
+  highPriorityOption.setAttribute("name", "priority-option");
   highPriorityOption.setAttribute("id", "high-priority");
   priorityTitle.appendChild(highPriorityOption);
 
@@ -168,6 +170,7 @@ const submitTodoForm = (event) => {
   const todosContainer = document.querySelector("#todos-container");
   todosContainer.innerHTML = "";
 
+  updateProjectList();
   removeTodoForm();
 };
 

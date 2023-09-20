@@ -8,8 +8,17 @@ const updateProjectList = () => {
     const projectListItem = document.createElement("div");
     projectListItem.classList.add("project-list-item");
     projectListItem.setAttribute("data-project-id", i);
-    projectListItem.textContent = projectListArray[i].textContent.toUpperCase();
     projectList.appendChild(projectListItem);
+
+    const projectItemText = document.createElement("div");
+    projectItemText.classList.add("project-item-text");
+    projectItemText.textContent = projectListArray[i].textContent.toUpperCase();
+    projectListItem.appendChild(projectItemText);
+
+    const projectItemAmount = document.createElement("div");
+    projectItemAmount.classList.add("project-item-amount");
+    projectItemAmount.textContent = projectListArray[i].length;
+    projectListItem.appendChild(projectItemAmount);
   };
 
   const projectListItem = document.querySelectorAll(".project-list-item");
@@ -31,6 +40,46 @@ const updateProjectList = () => {
           const todoItemLeftContainer = document.createElement("div");
           todoItemLeftContainer.classList.add("todo-item-left-container");
           todoItem.appendChild(todoItemLeftContainer);
+
+          todoItemLeftContainer.addEventListener("click", function showTodoItem () {
+            const todoBackground = document.createElement("div");
+            todoBackground.setAttribute("id", "todo-background");
+            document.body.appendChild(todoBackground);
+          
+            const formContainer = document.createElement("div");
+            formContainer.setAttribute("id", "form-container");
+            document.body.appendChild(formContainer);
+          
+            const cancelButtonContainer = document.createElement("div");
+            cancelButtonContainer.setAttribute("id", "cancel-project-button-container");
+            formContainer.appendChild(cancelButtonContainer);
+          
+            const exitTodoButton = document.createElement("button");
+            exitTodoButton.setAttribute("id", "exit-todo-button");
+            exitTodoButton.textContent = "X";
+            cancelButtonContainer.appendChild(exitTodoButton);
+
+            exitTodoButton.addEventListener("click", exitTodo);
+
+            const todoDetailsContainer = document.createElement("div");
+            todoDetailsContainer.setAttribute("id", "todo-details-container");
+            formContainer.appendChild(todoDetailsContainer);
+          
+            const selectedTodoItemTitle = document.createElement("div");
+            selectedTodoItemTitle.setAttribute("id", "selected-todo-item-title");
+            selectedTodoItemTitle.textContent = selectedProject[i].title;
+            todoDetailsContainer.appendChild(selectedTodoItemTitle);
+
+            const selectedTodoItemDueDate = document.createElement("div");
+            selectedTodoItemDueDate.setAttribute("id", "selected-todo-item-due-date");
+            selectedTodoItemDueDate.textContent = `Due date: ${selectedProject[i].dueDate}`;
+            todoDetailsContainer.appendChild(selectedTodoItemDueDate);
+
+            const selectedTodoItemDescription = document.createElement("div");
+            selectedTodoItemDescription.setAttribute("id", "selected-todo-item-description");
+            selectedTodoItemDescription.textContent = `Description: ${selectedProject[i].description}`;
+            todoDetailsContainer.appendChild(selectedTodoItemDescription);
+          });
 
           const todoItemTitle = document.createElement("div");
           todoItemTitle.classList.add("todo-item-title");
@@ -59,6 +108,122 @@ const updateProjectList = () => {
           editIcon.textContent = "edit";
           todoItemRightContainer.appendChild(editIcon);
 
+          editIcon.addEventListener("click", editTodoItem);
+
+          function editTodoItem () {
+            const todoBackground = document.createElement("div");
+            todoBackground.setAttribute("id", "todo-background");
+            document.body.appendChild(todoBackground);
+          
+            const formContainer = document.createElement("div");
+            formContainer.setAttribute("id", "form-container");
+            document.body.appendChild(formContainer);
+          
+            const cancelButtonContainer = document.createElement("div");
+            cancelButtonContainer.setAttribute("id", "cancel-project-button-container");
+            formContainer.appendChild(cancelButtonContainer);
+          
+            const exitTodoButton = document.createElement("button");
+            exitTodoButton.setAttribute("id", "exit-todo-button");
+            exitTodoButton.textContent = "X";
+            cancelButtonContainer.appendChild(exitTodoButton);
+
+            exitTodoButton.addEventListener("click", exitTodo);
+
+            const todoDetailsContainer = document.createElement("div");
+            todoDetailsContainer.setAttribute("id", "todo-details-container");
+            formContainer.appendChild(todoDetailsContainer);
+
+            const selectedTitleLabel = document.createElement("div");
+            selectedTitleLabel.setAttribute("id", "selected-title-label");
+            selectedTitleLabel.textContent = "Title";
+            todoDetailsContainer.appendChild(selectedTitleLabel);
+          
+            const selectedTodoItemTitle = document.createElement("input");
+            selectedTodoItemTitle.setAttribute("id", "selected-title-input");
+            selectedTodoItemTitle.value = selectedProject[i].title;
+            todoDetailsContainer.appendChild(selectedTodoItemTitle);
+
+            const selectedDueDateLabel = document.createElement("div");
+            selectedDueDateLabel.setAttribute("id", "selected-due-date-label");
+            selectedDueDateLabel.textContent = "Due Date";
+            todoDetailsContainer.appendChild(selectedDueDateLabel);
+
+            const selectedTodoItemDueDate = document.createElement("input");
+            selectedTodoItemDueDate.setAttribute("id", "selected-due-date-input");
+            selectedTodoItemDueDate.value = selectedProject[i].dueDate;
+            todoDetailsContainer.appendChild(selectedTodoItemDueDate);
+
+            const selectedDescriptionLabel = document.createElement("div");
+            selectedDescriptionLabel.setAttribute("id", "selected-description-label");
+            selectedDescriptionLabel.textContent = "Description";
+            todoDetailsContainer.appendChild(selectedDescriptionLabel);
+
+            const selectedTodoItemDescription = document.createElement("input");
+            selectedTodoItemDescription.setAttribute("id", "selected-description-input");
+            selectedTodoItemDescription.value = selectedProject[i].description;
+            todoDetailsContainer.appendChild(selectedTodoItemDescription);
+
+            const selectedLowPriorityLabel = document.createElement("label");
+            selectedLowPriorityLabel.setAttribute("id", "low-priority-label");
+            selectedLowPriorityLabel.textContent = "LOW";
+            todoDetailsContainer.appendChild(selectedLowPriorityLabel);
+
+            const selectedTodoItemLowPriority = document.createElement("input");
+            selectedTodoItemLowPriority.setAttribute("type", "radio");
+            selectedTodoItemLowPriority.setAttribute("id", "low-priority");
+            // selectedTodoItemLowPriority.classList.add("priority-option");
+            selectedTodoItemLowPriority.setAttribute("name", "priority-option");
+            selectedTodoItemLowPriority.checked = selectedProject[i].lowPriority;
+            todoDetailsContainer.appendChild(selectedTodoItemLowPriority);
+
+            const selectedHighPriorityLabel = document.createElement("label");
+            selectedHighPriorityLabel.setAttribute("id", "high-priority-label");
+            selectedHighPriorityLabel.textContent = "HIGH";
+            todoDetailsContainer.appendChild(selectedHighPriorityLabel);
+
+            const selectedTodoItemHighPriority = document.createElement("input");
+            selectedTodoItemHighPriority.setAttribute("type", "radio");
+            selectedTodoItemHighPriority.setAttribute("id", "high-priority");
+            // selectedTodoItemHighPriority.classList.add("priority-option");
+            selectedTodoItemHighPriority.setAttribute("name", "priority-option");
+            selectedTodoItemHighPriority.checked = selectedProject[i].highPriority;
+            todoDetailsContainer.appendChild(selectedTodoItemHighPriority);
+
+            const submitEditTodoButton = document.createElement("button");
+            submitEditTodoButton.setAttribute("id", "submit-todo-edit-button");
+            submitEditTodoButton.textContent = "Submit Edit";
+            todoDetailsContainer.appendChild(submitEditTodoButton);
+
+            const submitTodoEditForm = (event) => {
+              event.preventDefault();
+
+              const EditedTodo = (title, description, dueDate, lowPriority, highPriority) => {
+                return { title, description, dueDate, lowPriority, highPriority };
+              };
+
+              const title = document.querySelector("#selected-title-input").value;
+              const description = document.querySelector("#selected-description-input").value;
+              const dueDate = document.querySelector("#selected-due-date-input").value;
+              const lowPriority = document.querySelector("#low-priority").checked;
+              const highPriority = document.querySelector("#high-priority").checked;
+              
+              const todoEdit = EditedTodo(title, description, dueDate, lowPriority, highPriority);
+
+              selectedProject.splice(todoItem.dataset.todoId, 1, todoEdit);
+              showTodosList();
+              updateProjectList();
+
+              const todoBackground = document.querySelector("#todo-background");
+              document.body.removeChild(todoBackground);
+
+              const formContainer = document.querySelector("#form-container");
+              document.body.removeChild(formContainer);
+            };
+
+            submitEditTodoButton.addEventListener("click", submitTodoEditForm);
+          };
+
           const deleteIcon = document.createElement("class");
           deleteIcon.setAttribute("id", "delete-icon");
           deleteIcon.classList.add("id", "material-symbols-outlined");
@@ -71,6 +236,7 @@ const updateProjectList = () => {
             todosContainer.removeChild(todoItem);
             selectedProject.splice(todoItem.dataset.todoId, 1);
             showTodosList();
+            updateProjectList();
           };
         };
       };
@@ -78,6 +244,14 @@ const updateProjectList = () => {
       showTodosList();
     });
   });
+};
+
+const exitTodo = () => {
+  const todoBackground = document.querySelector("#todo-background");
+  document.body.removeChild(todoBackground);
+
+  const formContainer = document.querySelector("#form-container");
+  document.body.removeChild(formContainer);
 };
 
 export { updateProjectList };
