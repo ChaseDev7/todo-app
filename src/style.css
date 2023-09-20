@@ -451,6 +451,38 @@ textarea {
   font-weight: bold;
 }
 
+#priority-container {
+  margin: 5px 10px;
+  display: flex;
+  align-items: center;
+}
+
+#high-priority-container {
+  margin-left: 10px;
+  color: white;
+  background-color: rgb(215, 45, 45);
+  padding: 2px 5px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#low-priority-container {
+  margin: 10px;
+  color: white;
+  background-color: rgb(11, 147, 11);
+  padding: 2px 5px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #selected-todo-item-due-date {
   padding: 5px 0 0 10px;
   font-size: 12px;
@@ -462,7 +494,7 @@ textarea {
   padding: 10px;
 }
 
-#selected-title-label, #selected-due-date-label, #selected-description-label {
+#selected-title-label, #selected-due-date-label, #selected-description-label, #selected-priority-label {
   padding: 10px;
 }
 

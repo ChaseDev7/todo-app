@@ -70,6 +70,23 @@ const updateProjectList = () => {
             selectedTodoItemTitle.textContent = selectedProject[i].title;
             todoDetailsContainer.appendChild(selectedTodoItemTitle);
 
+            const priorityContainer = document.createElement("div");
+            priorityContainer.setAttribute("id", "priority-container");
+            priorityContainer.textContent = "Priority: ";
+            todoDetailsContainer.appendChild(priorityContainer);
+
+            if (selectedProject[i].highPriority == true) {
+              const highPriorityContainer = document.createElement("div");
+              highPriorityContainer.setAttribute("id", "high-priority-container");
+              highPriorityContainer.textContent = "HIGH";
+              priorityContainer.appendChild(highPriorityContainer);
+            } else if (selectedProject[i].lowPriority == true) {
+              const lowPriorityContainer = document.createElement("div");
+              lowPriorityContainer.setAttribute("id", "low-priority-container");
+              lowPriorityContainer.textContent = "LOW";
+              priorityContainer.appendChild(lowPriorityContainer);
+            };
+
             const selectedTodoItemDueDate = document.createElement("div");
             selectedTodoItemDueDate.setAttribute("id", "selected-todo-item-due-date");
             selectedTodoItemDueDate.textContent = `Due date: ${selectedProject[i].dueDate}`;
@@ -164,28 +181,35 @@ const updateProjectList = () => {
             selectedTodoItemDescription.value = selectedProject[i].description;
             todoDetailsContainer.appendChild(selectedTodoItemDescription);
 
+            const selectedPriorityLabel = document.createElement("div");
+            selectedPriorityLabel.setAttribute("id", "selected-priority-label");
+            selectedPriorityLabel.textContent = "Priority";
+            todoDetailsContainer.appendChild(selectedPriorityLabel);
+
             const selectedLowPriorityLabel = document.createElement("label");
             selectedLowPriorityLabel.setAttribute("id", "low-priority-label");
+            selectedLowPriorityLabel.setAttribute("for", "low-priority");
             selectedLowPriorityLabel.textContent = "LOW";
             todoDetailsContainer.appendChild(selectedLowPriorityLabel);
 
             const selectedTodoItemLowPriority = document.createElement("input");
             selectedTodoItemLowPriority.setAttribute("type", "radio");
             selectedTodoItemLowPriority.setAttribute("id", "low-priority");
-            // selectedTodoItemLowPriority.classList.add("priority-option");
+            selectedTodoItemLowPriority.classList.add("priority-option");
             selectedTodoItemLowPriority.setAttribute("name", "priority-option");
             selectedTodoItemLowPriority.checked = selectedProject[i].lowPriority;
             todoDetailsContainer.appendChild(selectedTodoItemLowPriority);
 
             const selectedHighPriorityLabel = document.createElement("label");
             selectedHighPriorityLabel.setAttribute("id", "high-priority-label");
+            selectedHighPriorityLabel.setAttribute("for", "high-priority");
             selectedHighPriorityLabel.textContent = "HIGH";
             todoDetailsContainer.appendChild(selectedHighPriorityLabel);
 
             const selectedTodoItemHighPriority = document.createElement("input");
             selectedTodoItemHighPriority.setAttribute("type", "radio");
             selectedTodoItemHighPriority.setAttribute("id", "high-priority");
-            // selectedTodoItemHighPriority.classList.add("priority-option");
+            selectedTodoItemHighPriority.classList.add("priority-option");
             selectedTodoItemHighPriority.setAttribute("name", "priority-option");
             selectedTodoItemHighPriority.checked = selectedProject[i].highPriority;
             todoDetailsContainer.appendChild(selectedTodoItemHighPriority);
