@@ -1,5 +1,4 @@
 import { projectListArray } from ".";
-import { compareAsc } from 'date-fns';
 
 const updateProjectList = () => {
   const projectList = document.querySelector("#project-list");
@@ -33,8 +32,6 @@ const updateProjectList = () => {
         todosContainer.innerHTML = "";
 
         for (let i = 0; i < selectedProject.length; i++) {
-          // selectedProject[i].dueDate.sort(compareAsc);
-          // PPPppp
           const todoItem = document.createElement("div");
           todoItem.classList.add("todo-item");
           todoItem.setAttribute("data-todo-id", i);
