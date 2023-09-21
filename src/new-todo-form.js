@@ -159,6 +159,7 @@ const submitTodoForm = (event) => {
   const highPriority = document.querySelector("#high-priority").checked;
 
   const newTodo = Todo(title, description, dueDate, lowPriority, highPriority);
+  console.log(newTodo);
 
   for (let i = 0; i < projectListArray.length; i++) {
     const newProjectRadio = document.querySelectorAll(".project-name");

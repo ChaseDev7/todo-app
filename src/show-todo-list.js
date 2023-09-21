@@ -1,4 +1,5 @@
 import { projectListArray } from ".";
+import { compareAsc } from 'date-fns';
 
 const updateProjectList = () => {
   const projectList = document.querySelector("#project-list");
@@ -32,6 +33,8 @@ const updateProjectList = () => {
         todosContainer.innerHTML = "";
 
         for (let i = 0; i < selectedProject.length; i++) {
+          // selectedProject[i].dueDate.sort(compareAsc);
+          // PPPppp
           const todoItem = document.createElement("div");
           todoItem.classList.add("todo-item");
           todoItem.setAttribute("data-todo-id", i);
@@ -167,6 +170,7 @@ const updateProjectList = () => {
             todoDetailsContainer.appendChild(selectedDueDateLabel);
 
             const selectedTodoItemDueDate = document.createElement("input");
+            selectedTodoItemDueDate.setAttribute("type", "date");
             selectedTodoItemDueDate.setAttribute("id", "selected-due-date-input");
             selectedTodoItemDueDate.value = selectedProject[i].dueDate;
             todoDetailsContainer.appendChild(selectedTodoItemDueDate);
@@ -176,8 +180,8 @@ const updateProjectList = () => {
             selectedDescriptionLabel.textContent = "Description";
             todoDetailsContainer.appendChild(selectedDescriptionLabel);
 
-            const selectedTodoItemDescription = document.createElement("input");
-            selectedTodoItemDescription.setAttribute("id", "selected-description-input");
+            const selectedTodoItemDescription = document.createElement("textarea");
+            selectedTodoItemDescription.setAttribute("id", "selected-description-textarea");
             selectedTodoItemDescription.value = selectedProject[i].description;
             todoDetailsContainer.appendChild(selectedTodoItemDescription);
 
@@ -227,7 +231,7 @@ const updateProjectList = () => {
               };
 
               const title = document.querySelector("#selected-title-input").value;
-              const description = document.querySelector("#selected-description-input").value;
+              const description = document.querySelector("#selected-description-textarea").value;
               const dueDate = document.querySelector("#selected-due-date-input").value;
               const lowPriority = document.querySelector("#low-priority").checked;
               const highPriority = document.querySelector("#high-priority").checked;

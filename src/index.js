@@ -34,13 +34,31 @@ const todoItemOne = {
 const todoItemTwo = {
   title: "Add edit button", 
   description: "Need to add button in order to edit details!", 
-  dueDate: "2023-09-30", 
+  dueDate: "2023-09-30",
+  lowPriority: true, 
+  highPriority: false
+};
+
+const todoItemThree = {
+  title: "Clean tables", 
+  description: "The restaurant is busy at night.", 
+  dueDate: "2023-10-07", 
+  lowPriority: true, 
+  highPriority: false
+};
+
+const todoItemFour = {
+  title: "Finish Project", 
+  description: "These are details of the todo you selected. This description is longer than others, in order to expand the container.", 
+  dueDate: "2023-09-27",
   lowPriority: true, 
   highPriority: false
 };
 
 defaultProject.push(todoItemOne);
 defaultProject.push(todoItemTwo);
+restaurantPage.push(todoItemThree);
+defaultProject.push(todoItemFour);
 
 const navBar = document.createElement("div");
 navBar.setAttribute("id", "nav-bar");
@@ -88,24 +106,6 @@ const newProjectButton = document.createElement("button");
 newProjectButton.setAttribute("id", "new-project-button");
 newProjectButton.textContent = "Add Project";
 rightNavBar.appendChild(newProjectButton);
-
-const checkProjects = document.createElement("button");
-checkProjects.setAttribute("id", "check-projects-button");
-checkProjects.textContent = "Check Project";
-rightNavBar.appendChild(checkProjects);
-
-const checkDefaultProject = document.createElement("button");
-checkDefaultProject.setAttribute("id", "check-default-project-button");
-checkDefaultProject.textContent = "Check Default";
-rightNavBar.appendChild(checkDefaultProject);
-
-checkProjects.addEventListener("click", function checkProjectsInList () {
-  console.log(projectListArray);
-});
-
-checkDefaultProject.addEventListener("click", function checkDefaultProject () {
-  console.log(defaultProject);
-});
 
 newProjectButton.addEventListener("click", addProjectForm);
 
