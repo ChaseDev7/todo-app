@@ -1,4 +1,5 @@
 import { projectListArray } from ".";
+import { format } from 'date-fns';
 
 const updateProjectList = () => {
   const projectList = document.querySelector("#project-list");
@@ -26,12 +27,16 @@ const updateProjectList = () => {
   projectListItem.forEach((project) => {
     project.addEventListener("click", function showTodosFromProject () {
       const selectedProject = projectListArray[project.dataset.projectId];
+      selectedProject.sort((dd1, dd2) => (dd1.dueDate > dd2.dueDate) ? 1 : (dd1.dueDate < dd2.dueDate) ? -1 : 0);
 
       const showTodosList = () => {
         const todosContainer = document.querySelector("#todos-container");
         todosContainer.innerHTML = "";
 
         for (let i = 0; i < selectedProject.length; i++) {
+          let newDueDate = selectedProject[i].dueDate.replace(/-/g, '\/');
+          newDueDate = format(new Date(newDueDate), 'PP');
+
           const todoItem = document.createElement("div");
           todoItem.classList.add("todo-item");
           todoItem.setAttribute("data-todo-id", i);
@@ -89,7 +94,7 @@ const updateProjectList = () => {
 
             const selectedTodoItemDueDate = document.createElement("div");
             selectedTodoItemDueDate.setAttribute("id", "selected-todo-item-due-date");
-            selectedTodoItemDueDate.textContent = `Due date: ${selectedProject[i].dueDate}`;
+            selectedTodoItemDueDate.textContent = `Due date: ${newDueDate}`;
             todoDetailsContainer.appendChild(selectedTodoItemDueDate);
 
             const selectedTodoItemDescription = document.createElement("div");
@@ -116,7 +121,7 @@ const updateProjectList = () => {
 
           const itemDueDate = document.createElement("div");
           itemDueDate.classList.add("todo-item-due-date");
-          itemDueDate.textContent = selectedProject[i].dueDate;
+          itemDueDate.textContent = newDueDate;
           todoItemRightContainer.appendChild(itemDueDate);
 
           const editIcon = document.createElement("class");
@@ -238,6 +243,9 @@ const updateProjectList = () => {
               selectedProject.splice(todoItem.dataset.todoId, 1, todoEdit);
               showTodosList();
               updateProjectList();
+
+              const todosContainer = document.querySelector("#todos-container");
+              todosContainer.innerHTML = "";
 
               const todoBackground = document.querySelector("#todo-background");
               document.body.removeChild(todoBackground);

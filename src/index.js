@@ -15,51 +15,6 @@ const defaultProject = [];
 defaultProject.textContent = "Default Project";
 projectListArray.push(defaultProject);
 
-const libraryApp = [];
-libraryApp.textContent = "Library App";
-projectListArray.push(libraryApp);
-
-const restaurantPage = [];
-restaurantPage.textContent = "Restaurant Page";
-projectListArray.push(restaurantPage);
-
-const todoItemOne = {
-  title: "New todo", 
-  description: "Things to read", 
-  dueDate: "2023-09-19", 
-  lowPriority: false, 
-  highPriority: true
-};
-
-const todoItemTwo = {
-  title: "Add edit button", 
-  description: "Need to add button in order to edit details!", 
-  dueDate: "2023-09-30",
-  lowPriority: true, 
-  highPriority: false
-};
-
-const todoItemThree = {
-  title: "Clean tables", 
-  description: "The restaurant is busy at night.", 
-  dueDate: "2023-10-07", 
-  lowPriority: true, 
-  highPriority: false
-};
-
-const todoItemFour = {
-  title: "Finish Project", 
-  description: "These are details of the todo you selected. This description is longer than others, in order to expand the container.", 
-  dueDate: "2023-09-27",
-  lowPriority: true, 
-  highPriority: false
-};
-
-defaultProject.push(todoItemOne);
-defaultProject.push(todoItemTwo);
-restaurantPage.push(todoItemThree);
-defaultProject.push(todoItemFour);
-
 const navBar = document.createElement("div");
 navBar.setAttribute("id", "nav-bar");
 navBar.textContent = "Todo App";
